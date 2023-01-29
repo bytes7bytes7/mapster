@@ -59,9 +59,9 @@ void twoSourcesExample(Mapster mapster) {
     text: "The philosopher's stone",
   );
 
-  // You can swap source types, the result will be the same
-  final postResponse1 = mapster.map2<User, Post, PostResponse>(user, post);
-  final postResponse2 = mapster.map2<Post, User, PostResponse>(post, user);
+  // You can swap source objects, the result will be the same
+  final postResponse1 = mapster.map2(user, post, to<PostResponse>);
+  final postResponse2 = mapster.map2(post, user, to<PostResponse>);
 
   print(postResponse1);
   print(postResponse2);
@@ -104,18 +104,22 @@ void threeSourcesExample(Mapster mapster) {
     lastName: 'Weasley',
   );
 
-  // You can swap source types, but if you swap multiple objects of the same type,
+  // You can swap source objects, but if you swap multiple objects of the same type,
   // the result WILL change.
+  // Mapster does its maximum. But Mapster is not able to define the right order
+  // for multiple objects of the same type.
   // So, you should avoid creating Mappers with multiple objects of the same type.
-  final notification1 = mapster.map3<User, User, Post, LikedPostNotification>(
+  final notification1 = mapster.map3(
     user,
     likeUser,
     post,
+    to<LikedPostNotification>,
   );
-  final notification2 = mapster.map3<User, User, Post, LikedPostNotification>(
+  final notification2 = mapster.map3(
     likeUser,
     user,
     post,
+    to<LikedPostNotification>,
   );
 
   print(notification1);

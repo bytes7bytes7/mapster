@@ -55,17 +55,21 @@ void main() {
     lastName: 'Potter',
   );
 
-  final userResponse = mapster.map<User, UserResponse>(user);
+  final userResponse = mapster.map(user, to<UserResponse>);
 }
 ```
 
-## Generic types
+Note that you should pass `to<YourResultType>` as last parameter. This way you specify what type
+should `Mapster` return.
 
-You must specify generic types when you call `Mapster`'s methods: `map`, `map2`, ... , `map9`.
-First, specify all source types and then specify an output type. An output type must be the last.
+## Map functions
 
-You can swap source types in `Mapster`'s `map` methods as you wish. You do not need to check the
-order of input types every time. `Mapster` is smart enough to find a proper `Mapper`.
+`Mapster` has 9 `map` methods: `map`, `map2`, ... , `map9`. All of them get all source objects and
+then `to<YourResultType>`.
+
+You can swap source objects in `Mapster`'s `map` methods as you wish. You do not need to check the
+order of input objects in signature of certain `Mapper` every time. `Mapster` is smart enough to
+find a proper `Mapper`.
 
 ```dart
 class UserPostToPostResponse extends TwoSourcesMapper<User, Post, PostResponse> {
@@ -98,9 +102,9 @@ void main() {
     text: "The philosopher's stone",
   );
 
-  // You can swap source types, the result will be the same
-  final postResponse1 = mapster.map2<User, Post, PostResponse>(user, post);
-  final postResponse2 = mapster.map2<Post, User, PostResponse>(post, user);
+  // You can swap source objects, the result will be the same
+  final postResponse1 = mapster.map2(user, post, to<PostResponse>);
+  final postResponse2 = mapster.map2(post, user, to<PostResponse>);
 }
 ```
 
@@ -147,26 +151,29 @@ void main() {
     lastName: 'Weasley',
   );
 
-  // You can swap source types, but if you swap multiple objects of the same type,
+  // You can swap source objects, but if you swap multiple objects of the same type,
   // the result WILL change.
-  // Mapster does its the maximum. But it is not able to define the right order
+  // Mapster does its maximum. But Mapster is not able to define the right order
   // for multiple objects of the same type.
   // So, you should avoid creating Mappers with multiple objects of the same type.
-  final notification1 = mapster.map3<User, User, Post, LikedPostNotification>(
+  final notification1 = mapster.map3(
     user,
     likeUser,
     post,
+    to<LikedPostNotification>,
   );
-  final notification2 = mapster.map3<User, User, Post, LikedPostNotification>(
+  final notification2 = mapster.map3(
     likeUser,
     user,
     post,
+    to<LikedPostNotification>,
   );
 }
 ```
 
 ## Pros
 
+- Do not need to specify types.
 - Mapster package has no dependency
 - Mapster has O(1) time complexity of search for a proper Mapper
 - Do not need to inject your classes/functions with large amount of mappers anymore. Just inject
