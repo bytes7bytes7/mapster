@@ -1,8 +1,6 @@
-class MapperNotRegistered implements Exception {
-  const MapperNotRegistered(this.mapperType);
+import '../../mappers/mappers.dart';
 
-  final Type mapperType;
-
+class MapperNotRegistered<T extends Mapper> implements Exception {
   @override
-  String toString() => '$mapperType is not registered';
+  String toString() => '$T is not registered';
 }

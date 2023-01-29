@@ -28,7 +28,7 @@ class _MapsterImpl implements Mapster {
     );
 
     if (mapper == null) {
-      throw MapperNotRegistered(OneSourceMapper<FROM, TO>);
+      throw MapperNotRegistered<OneSourceMapper<FROM, TO>>();
     }
 
     final args = _sortArgs(
@@ -60,9 +60,7 @@ class _MapsterImpl implements Mapster {
     );
 
     if (mapper == null) {
-      throw MapperNotRegistered(
-        TwoSourcesMapper<FROM1, FROM2, TO>,
-      );
+      throw MapperNotRegistered<TwoSourcesMapper<FROM1, FROM2, TO>>();
     }
 
     final args = _sortArgs(
@@ -100,9 +98,7 @@ class _MapsterImpl implements Mapster {
     );
 
     if (mapper == null) {
-      throw MapperNotRegistered(
-        ThreeSourcesMapper<FROM1, FROM2, FROM3, TO>,
-      );
+      throw MapperNotRegistered<ThreeSourcesMapper<FROM1, FROM2, FROM3, TO>>();
     }
 
     final args = _sortArgs(
@@ -144,9 +140,8 @@ class _MapsterImpl implements Mapster {
     );
 
     if (mapper == null) {
-      throw MapperNotRegistered(
-        FourSourcesMapper<FROM1, FROM2, FROM3, FROM4, TO>,
-      );
+      throw MapperNotRegistered<
+          FourSourcesMapper<FROM1, FROM2, FROM3, FROM4, TO>>();
     }
 
     final args = _sortArgs(
@@ -192,9 +187,8 @@ class _MapsterImpl implements Mapster {
     );
 
     if (mapper == null) {
-      throw MapperNotRegistered(
-        FiveSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, TO>,
-      );
+      throw MapperNotRegistered<
+          FiveSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, TO>>();
     }
 
     final args = _sortArgs(
@@ -244,9 +238,8 @@ class _MapsterImpl implements Mapster {
     );
 
     if (mapper == null) {
-      throw MapperNotRegistered(
-        SixSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, TO>,
-      );
+      throw MapperNotRegistered<
+          SixSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, TO>>();
     }
 
     final args = _sortArgs(
@@ -300,9 +293,9 @@ class _MapsterImpl implements Mapster {
     );
 
     if (mapper == null) {
-      throw MapperNotRegistered(
-        SevenSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7, TO>,
-      );
+      throw MapperNotRegistered<
+          SevenSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7,
+              TO>>();
     }
 
     final args = _sortArgs(
@@ -360,10 +353,9 @@ class _MapsterImpl implements Mapster {
     );
 
     if (mapper == null) {
-      throw MapperNotRegistered(
-        EightSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7,
-            FROM8, TO>,
-      );
+      throw MapperNotRegistered<
+          EightSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7,
+              FROM8, TO>>();
     }
 
     final args = _sortArgs(
@@ -425,10 +417,9 @@ class _MapsterImpl implements Mapster {
     );
 
     if (mapper == null) {
-      throw MapperNotRegistered(
-        NineSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7,
-            FROM8, FROM9, TO>,
-      );
+      throw MapperNotRegistered<
+          NineSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7,
+              FROM8, FROM9, TO>>();
     }
 
     final args = _sortArgs(
