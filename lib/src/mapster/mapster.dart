@@ -5,13 +5,22 @@ import 'exceptions/exceptions.dart';
 
 part 'mapster_impl.dart';
 
-/// Type of function that creates [TO]
+/// Type of function that creates [TO].
+/// Needed for [to] function.
 typedef TOCreator<TO> = TO Function();
 
-/// Very helpful function for [Mapster]
+/// Very helpful function for [Mapster].
 /// Do NOT call it (because it throws),
-/// just pass it to one of [Mapster]'s `map` function.
-TO fakeCreator<TO>() => throw Exception();
+/// just pass it to one of [Mapster]'s `map` function, like that:
+///
+/// ```dart
+/// final result = mapster.map(user, to<Result>);
+/// ```
+TO to<TO>() => throw Exception(
+      'Do NOT call this function. '
+      'You probably use `to<SomeType>()`. '
+      'If so, remove parenthesis like that: `to<SomeType>`',
+    );
 
 /// Class that contains all registered [Mapper]
 /// and use the proper [Mapper] for mapping
@@ -42,6 +51,7 @@ abstract class Mapster {
   TO map2<FROM1, FROM2, TO>(
     FROM1 object1,
     FROM2 object2,
+    TOCreator<TO> _,
   );
 
   /// Map 3 objects of types [FROM1], [FROM2], [FROM3]
@@ -50,6 +60,7 @@ abstract class Mapster {
     FROM1 object1,
     FROM2 object2,
     FROM3 object3,
+    TOCreator<TO> _,
   );
 
   /// Map 4 objects of types [FROM1], [FROM2], [FROM3], [FROM4]
@@ -59,6 +70,7 @@ abstract class Mapster {
     FROM2 object2,
     FROM3 object3,
     FROM4 object4,
+    TOCreator<TO> _,
   );
 
   /// Map 5 objects of types [FROM1], [FROM2], [FROM3], [FROM4], [FROM5]
@@ -69,6 +81,7 @@ abstract class Mapster {
     FROM3 object3,
     FROM4 object4,
     FROM5 object5,
+    TOCreator<TO> _,
   );
 
   /// Map 6 objects of types [FROM1], [FROM2], [FROM3], [FROM4], [FROM5],
@@ -80,6 +93,7 @@ abstract class Mapster {
     FROM4 object4,
     FROM5 object5,
     FROM6 object6,
+    TOCreator<TO> _,
   );
 
   /// Map 7 objects of types [FROM1], [FROM2], [FROM3], [FROM4], [FROM5],
@@ -92,6 +106,7 @@ abstract class Mapster {
     FROM5 object5,
     FROM6 object6,
     FROM7 object7,
+    TOCreator<TO> _,
   );
 
   /// Map 8 objects of types [FROM1], [FROM2], [FROM3], [FROM4], [FROM5],
@@ -105,6 +120,7 @@ abstract class Mapster {
     FROM6 object6,
     FROM7 object7,
     FROM8 object8,
+    TOCreator<TO> _,
   );
 
   /// Map 9 objects of types [FROM1], [FROM2], [FROM3], [FROM4], [FROM5],
@@ -119,5 +135,6 @@ abstract class Mapster {
     FROM7 object7,
     FROM8 object8,
     FROM9 object9,
+    TOCreator<TO> _,
   );
 }

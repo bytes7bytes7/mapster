@@ -44,7 +44,11 @@ class _MapsterImpl implements Mapster {
   }
 
   @override
-  TO map2<FROM1, FROM2, TO>(FROM1 object1, FROM2 object2) {
+  TO map2<FROM1, FROM2, TO>(
+    FROM1 object1,
+    FROM2 object2,
+    TOCreator<TO> _,
+  ) {
     final neededFromTypes = [
       FROM1,
       FROM2,
@@ -82,6 +86,7 @@ class _MapsterImpl implements Mapster {
     FROM1 object1,
     FROM2 object2,
     FROM3 object3,
+    TOCreator<TO> _,
   ) {
     final neededFromTypes = [
       FROM1,
@@ -124,6 +129,7 @@ class _MapsterImpl implements Mapster {
     FROM2 object2,
     FROM3 object3,
     FROM4 object4,
+    TOCreator<TO> _,
   ) {
     final neededFromTypes = [
       FROM1,
@@ -170,6 +176,7 @@ class _MapsterImpl implements Mapster {
     FROM3 object3,
     FROM4 object4,
     FROM5 object5,
+    TOCreator<TO> _,
   ) {
     final neededFromTypes = [
       FROM1,
@@ -220,6 +227,7 @@ class _MapsterImpl implements Mapster {
     FROM4 object4,
     FROM5 object5,
     FROM6 object6,
+    TOCreator<TO> _,
   ) {
     final neededFromTypes = [
       FROM1,
@@ -274,6 +282,7 @@ class _MapsterImpl implements Mapster {
     FROM5 object5,
     FROM6 object6,
     FROM7 object7,
+    TOCreator<TO> _,
   ) {
     final neededFromTypes = [
       FROM1,
@@ -332,6 +341,7 @@ class _MapsterImpl implements Mapster {
     FROM6 object6,
     FROM7 object7,
     FROM8 object8,
+    TOCreator<TO> _,
   ) {
     final neededFromTypes = [
       FROM1,
@@ -395,6 +405,7 @@ class _MapsterImpl implements Mapster {
     FROM7 object7,
     FROM8 object8,
     FROM9 object9,
+    TOCreator<TO> _,
   ) {
     final neededFromTypes = [
       FROM1,
