@@ -12,4 +12,17 @@ abstract class SixSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, TO>
     FROM5 object5,
     FROM6 object6,
   );
+
+  @override
+  Type get toType => TO;
+
+  @override
+  List<Type> get fromTypes => [
+        FROM1,
+        FROM2,
+        FROM3,
+        FROM4,
+        FROM5,
+        FROM6,
+      ];
 }

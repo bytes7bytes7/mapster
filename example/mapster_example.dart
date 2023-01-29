@@ -7,7 +7,7 @@ import 'post_response.dart';
 import 'user.dart';
 import 'user_response.dart';
 
-class UserToUserResponseMapper implements OneSourceMapper<User, UserResponse> {
+class UserToUserResponseMapper extends OneSourceMapper<User, UserResponse> {
   const UserToUserResponseMapper();
 
   @override
@@ -34,7 +34,7 @@ void oneSourceExample(Mapster mapster) {
 }
 
 class UserAndPostToPostResponse
-    implements TwoSourcesMapper<User, Post, PostResponse> {
+    extends TwoSourcesMapper<User, Post, PostResponse> {
   @override
   PostResponse map(User object1, Post object2) {
     return PostResponse(

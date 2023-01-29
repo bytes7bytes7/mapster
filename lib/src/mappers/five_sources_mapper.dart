@@ -11,4 +11,16 @@ abstract class FiveSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, TO>
     FROM4 object4,
     FROM5 object5,
   );
+
+  @override
+  Type get toType => TO;
+
+  @override
+  List<Type> get fromTypes => [
+        FROM1,
+        FROM2,
+        FROM3,
+        FROM4,
+        FROM5,
+      ];
 }

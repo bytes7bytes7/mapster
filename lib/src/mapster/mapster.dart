@@ -1,6 +1,9 @@
 import '../mappers/mapper.dart';
+import 'mapster_impl.dart';
 
 abstract class Mapster {
+  factory Mapster() = MapsterImpl;
+
   void register(Mapper mapper);
 
   TO map<FROM, TO>(

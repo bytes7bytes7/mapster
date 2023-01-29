@@ -14,4 +14,19 @@ abstract class EightSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6,
     FROM7 object7,
     FROM8 object8,
   );
+
+  @override
+  Type get toType => TO;
+
+  @override
+  List<Type> get fromTypes => [
+        FROM1,
+        FROM2,
+        FROM3,
+        FROM4,
+        FROM5,
+        FROM6,
+        FROM7,
+        FROM8,
+      ];
 }
