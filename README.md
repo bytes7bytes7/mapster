@@ -5,7 +5,7 @@ Mapster is an object mapping library.
 ## How to use
 
 1. Extend one of `Mapper` classes. There are 9 types: `OneSourceMapper`, `TwoSourcesMapper`, ...
-   , `NineSourcesMapper`. Extend `OneSourceMapper`, if you want to map 1 object to another.
+   , `NineSourcesMapper`. Extend `OneSourceMapper`, if you need to map 1 object to another.
    Extend `TwoSourcesMapper`, if you need to map 2 objects to another, and so on up to 9 source
    objects.
 
@@ -31,7 +31,7 @@ void main() {
 }
 ```
 
-3. Register all you mappers in created instance of `Mapster`.
+3. Register all your mappers in created instance of `Mapster`.
 
 ```dart
 void main() {
@@ -41,7 +41,7 @@ void main() {
 }
 ```
 
-4. And use `Mapster` to map!
+4. And use `Mapster`!
 
 ```dart
 void main() {
@@ -98,14 +98,14 @@ void main() {
     text: "The philosopher's stone",
   );
 
-  // You can swap `FROM` types, the result will be the same
+  // You can swap source types, the result will be the same
   final postResponse1 = mapster.map2<User, Post, PostResponse>(user, post);
   final postResponse2 = mapster.map2<Post, User, PostResponse>(post, user);
 }
 ```
 
-Be aware of `Mapper`s with multiple source objects of the same type. Under the hood, `Mapster` will
-match all input objects as they are passed. For example, lets look at this code:
+Be aware of `Mapper`s with multiple source objects of the same type. Under the hood, `Mapster`
+matches all input objects in order they are passed. For example, let's look at this code:
 
 ```dart
 class UserUserPostToLikedPostNotification
@@ -147,8 +147,10 @@ void main() {
     lastName: 'Weasley',
   );
 
-  // You can swap `FROM` types, but if you swap multiple objects of the same type,
+  // You can swap source types, but if you swap multiple objects of the same type,
   // the result WILL change.
+  // Mapster does its the maximum. But it is not able to define the right order
+  // for multiple objects of the same type.
   // So, you should avoid creating Mappers with multiple objects of the same type.
   final notification1 = mapster.map3<User, User, Post, LikedPostNotification>(
     user,

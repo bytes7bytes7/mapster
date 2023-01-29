@@ -19,6 +19,11 @@ class _MapsterImpl implements Mapster {
   }
 
   @override
+  void registerAll(List<Mapper> mappers) {
+    _mappers.addAll(mappers);
+  }
+
+  @override
   TO map<FROM, TO>(FROM object) {
     final neededFromTypes = [FROM];
 

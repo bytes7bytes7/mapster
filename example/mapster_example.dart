@@ -59,7 +59,7 @@ void twoSourcesExample(Mapster mapster) {
     text: "The philosopher's stone",
   );
 
-  // You can swap `FROM` types, the result will be the same
+  // You can swap source types, the result will be the same
   final postResponse1 = mapster.map2<User, Post, PostResponse>(user, post);
   final postResponse2 = mapster.map2<Post, User, PostResponse>(post, user);
 
@@ -104,7 +104,7 @@ void threeSourcesExample(Mapster mapster) {
     lastName: 'Weasley',
   );
 
-  // You can swap `FROM` types, but if you swap multiple objects of the same type,
+  // You can swap source types, but if you swap multiple objects of the same type,
   // the result WILL change.
   // So, you should avoid creating Mappers with multiple objects of the same type.
   final notification1 = mapster.map3<User, User, Post, LikedPostNotification>(

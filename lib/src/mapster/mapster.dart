@@ -9,9 +9,15 @@ part 'mapster_impl.dart';
 abstract class Mapster {
   factory Mapster() = _MapsterImpl;
 
-  /// Use this method to register all [Mapper]s
-  /// before using [Mapster]
+  /// Use this method to register your [Mapper]
+  /// before using [Mapster].
+  /// You can register multiple [Mapper]s at one.
+  /// For this check [registerAll].
   void register(Mapper mapper);
+
+  /// Use this method to register multiple [Mapper]s
+  /// at once.
+  void registerAll(List<Mapper> mappers);
 
   /// Map 1 object of type [FROM] to another object of type [TO].
   TO map<FROM, TO>(
