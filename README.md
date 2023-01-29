@@ -221,13 +221,17 @@ void main() {
 You can redefine `Mapper` by calling register/registerAll again, like that:
 
 ```dart
-
 void main(Mapster mapster) {
+  const user = User(
+    id: 1,
+    firstName: 'Harry',
+    lastName: 'Potter',
+  );
+
   // Register Mapper with input type: User, and output type: UserResponse
   mapster.register(const UserToUserResponseMapper());
 
   final userResponse1 = mapster.map(user, to<UserResponse>);
-
 
   // Register another Mapper with the same types: 
   // input type: User, and output type: UserResponse
@@ -237,6 +241,33 @@ void main(Mapster mapster) {
 }
 ```
 
-`Mapster` stores `Mapper`s based on its source types and result type. If new `Mapper` has the same
+`Mapster` stores `Mapper`s based on its' source types and result type. If new `Mapper` has the same
 set of input types (an order of input types does NOT matter) and the same output type as the
 old `Mapper`, then `Mapster` replaces old one with a new one.
+
+```dart
+void main(Mapster mapster) {
+  const user = User(
+    id: 1,
+    firstName: 'Harry',
+    lastName: 'Potter',
+  );
+
+  // Register Mapper with input type: User, and output type: UserResponse
+  mapster.register(const UserToUserResponseMapper());
+
+  final userResponse1 = mapster.map(user, to<UserResponse>);
+
+  // Register another Mapper with swapped result and input types: 
+  // input type: UserResponse, and output type: User
+  mapster.register(const UserResponseToUserMapper());
+
+  // Because input types set of the 1st Mapper contains
+  // different types than input types set of the 2nd Mapper,
+  // these two mappers considered as different.
+  // Also we can say: because output type of the 1st Mapper not
+  // equals to output type of the 2nd Mapper, these two
+  // mappers considered as different.
+  final user2 = mapster.map(userResponse1, to<User>);
+}
+```
