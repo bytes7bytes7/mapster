@@ -2,6 +2,7 @@
 
 import 'package:mapster/mapster.dart';
 
+import 'liked_post_notification.dart';
 import 'post.dart';
 import 'post_response.dart';
 import 'user.dart';
@@ -20,7 +21,7 @@ class UserToUserResponseMapper extends OneSourceMapper<User, UserResponse> {
 }
 
 void oneSourceExample(Mapster mapster) {
-  mapster.register(UserToUserResponseMapper());
+  mapster.register(const UserToUserResponseMapper());
 
   const user = User(
     id: 1,
@@ -33,8 +34,10 @@ void oneSourceExample(Mapster mapster) {
   print(userResponse);
 }
 
-class UserAndPostToPostResponse
+class UserPostToPostResponse
     extends TwoSourcesMapper<User, Post, PostResponse> {
+  const UserPostToPostResponse();
+
   @override
   PostResponse map(User object1, Post object2) {
     return PostResponse(
@@ -47,7 +50,7 @@ class UserAndPostToPostResponse
 }
 
 void twoSourcesExample(Mapster mapster) {
-  mapster.register(UserAndPostToPostResponse());
+  mapster.register(const UserPostToPostResponse());
 
   const user = User(
     id: 1,
@@ -68,9 +71,56 @@ void twoSourcesExample(Mapster mapster) {
   print(postResponse2);
 }
 
+class UserUserPostToLikedPostNotification
+    extends ThreeSourcesMapper<User, User, Post, LikedPostNotification> {
+  const UserUserPostToLikedPostNotification();
+
+  @override
+  LikedPostNotification map(User object1, User object2, Post object3) {
+    return LikedPostNotification(
+      postID: object3.id,
+      authorID: object1.id,
+      likeUserID: object2.id,
+      postText: object3.text,
+      authorName: '${object1.firstName} ${object1.lastName}',
+      likeUserName: '${object2.firstName} ${object2.lastName}',
+    );
+  }
+}
+
+void threeSourcesExample(Mapster mapster) {
+  mapster.register(const UserUserPostToLikedPostNotification());
+
+  const user = User(
+    id: 1,
+    firstName: 'Harry',
+    lastName: 'Potter',
+  );
+
+  const post = Post(
+    id: 1,
+    text: "The philosopher's stone",
+  );
+
+  const likeUser = User(
+    id: 2,
+    firstName: 'Ronald',
+    lastName: 'Weasley',
+  );
+
+  final notification1 = mapster.map3<User, User, Post, LikedPostNotification>(
+    user,
+    likeUser,
+    post,
+  );
+
+  print(notification1);
+}
+
 void main() {
   final mapster = Mapster();
 
   oneSourceExample(mapster);
   twoSourcesExample(mapster);
+  threeSourcesExample(mapster);
 }

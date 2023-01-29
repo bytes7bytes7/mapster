@@ -33,14 +33,16 @@ class MapsterImpl implements Mapster {
       throw MapperNotRegistered(OneSourceMapper<FROM, TO>);
     }
 
+    final passedObjects = [object];
+
     final args = _sortArgs(
       mapper,
       neededFromTypes,
-      [object],
+      passedObjects,
     );
 
     return mapper.map(
-      args[0],
+      passedObjects[args[0]!],
     );
   }
 
@@ -62,18 +64,20 @@ class MapsterImpl implements Mapster {
       );
     }
 
+    final passedObjects = [
+      object1,
+      object2,
+    ];
+
     final args = _sortArgs(
       mapper,
       neededFromTypes,
-      [
-        object1,
-        object2,
-      ],
+      passedObjects,
     );
 
     return mapper.map(
-      args[0],
-      args[1],
+      passedObjects[args[0]!],
+      passedObjects[args[1]!],
     );
   }
 
@@ -100,20 +104,22 @@ class MapsterImpl implements Mapster {
       );
     }
 
+    final passedObjects = [
+      object1,
+      object2,
+      object3,
+    ];
+
     final args = _sortArgs(
       mapper,
       neededFromTypes,
-      [
-        object1,
-        object2,
-        object3,
-      ],
+      passedObjects,
     );
 
     return mapper.map(
-      args[0],
-      args[1],
-      args[2],
+      passedObjects[args[0]!],
+      passedObjects[args[1]!],
+      passedObjects[args[2]!],
     );
   }
 
@@ -142,22 +148,24 @@ class MapsterImpl implements Mapster {
       );
     }
 
+    final passedObjects = [
+      object1,
+      object2,
+      object3,
+      object4,
+    ];
+
     final args = _sortArgs(
       mapper,
       neededFromTypes,
-      [
-        object1,
-        object2,
-        object3,
-        object4,
-      ],
+      passedObjects,
     );
 
     return mapper.map(
-      args[0],
-      args[1],
-      args[2],
-      args[3],
+      passedObjects[args[0]!],
+      passedObjects[args[1]!],
+      passedObjects[args[2]!],
+      passedObjects[args[3]!],
     );
   }
 
@@ -188,24 +196,26 @@ class MapsterImpl implements Mapster {
       );
     }
 
+    final passedObjects = [
+      object1,
+      object2,
+      object3,
+      object4,
+      object5,
+    ];
+
     final args = _sortArgs(
       mapper,
       neededFromTypes,
-      [
-        object1,
-        object2,
-        object3,
-        object4,
-        object5,
-      ],
+      passedObjects,
     );
 
     return mapper.map(
-      args[0],
-      args[1],
-      args[2],
-      args[3],
-      args[4],
+      passedObjects[args[0]!],
+      passedObjects[args[1]!],
+      passedObjects[args[2]!],
+      passedObjects[args[3]!],
+      passedObjects[args[4]!],
     );
   }
 
@@ -238,26 +248,28 @@ class MapsterImpl implements Mapster {
       );
     }
 
+    final passedObjects = [
+      object1,
+      object2,
+      object3,
+      object4,
+      object5,
+      object6,
+    ];
+
     final args = _sortArgs(
       mapper,
       neededFromTypes,
-      [
-        object1,
-        object2,
-        object3,
-        object4,
-        object5,
-        object6,
-      ],
+      passedObjects,
     );
 
     return mapper.map(
-      args[0],
-      args[1],
-      args[2],
-      args[3],
-      args[4],
-      args[5],
+      passedObjects[args[0]!],
+      passedObjects[args[1]!],
+      passedObjects[args[2]!],
+      passedObjects[args[3]!],
+      passedObjects[args[4]!],
+      passedObjects[args[5]!],
     );
   }
 
@@ -292,28 +304,30 @@ class MapsterImpl implements Mapster {
       );
     }
 
+    final passedObjects = [
+      object1,
+      object2,
+      object3,
+      object4,
+      object5,
+      object6,
+      object7,
+    ];
+
     final args = _sortArgs(
       mapper,
       neededFromTypes,
-      [
-        object1,
-        object2,
-        object3,
-        object4,
-        object5,
-        object6,
-        object7,
-      ],
+      passedObjects,
     );
 
     return mapper.map(
-      args[0],
-      args[1],
-      args[2],
-      args[3],
-      args[4],
-      args[5],
-      args[6],
+      passedObjects[args[0]!],
+      passedObjects[args[1]!],
+      passedObjects[args[2]!],
+      passedObjects[args[3]!],
+      passedObjects[args[4]!],
+      passedObjects[args[5]!],
+      passedObjects[args[6]!],
     );
   }
 
@@ -351,30 +365,32 @@ class MapsterImpl implements Mapster {
       );
     }
 
+    final passedObjects = [
+      object1,
+      object2,
+      object3,
+      object4,
+      object5,
+      object6,
+      object7,
+      object8,
+    ];
+
     final args = _sortArgs(
       mapper,
       neededFromTypes,
-      [
-        object1,
-        object2,
-        object3,
-        object4,
-        object5,
-        object6,
-        object7,
-        object8,
-      ],
+      passedObjects,
     );
 
     return mapper.map(
-      args[0],
-      args[1],
-      args[2],
-      args[3],
-      args[4],
-      args[5],
-      args[6],
-      args[7],
+      passedObjects[args[0]!],
+      passedObjects[args[1]!],
+      passedObjects[args[2]!],
+      passedObjects[args[3]!],
+      passedObjects[args[4]!],
+      passedObjects[args[5]!],
+      passedObjects[args[6]!],
+      passedObjects[args[7]!],
     );
   }
 
@@ -414,32 +430,34 @@ class MapsterImpl implements Mapster {
       );
     }
 
+    final passedObjects = [
+      object1,
+      object2,
+      object3,
+      object4,
+      object5,
+      object6,
+      object7,
+      object8,
+      object9,
+    ];
+
     final args = _sortArgs(
       mapper,
       neededFromTypes,
-      [
-        object1,
-        object2,
-        object3,
-        object4,
-        object5,
-        object6,
-        object7,
-        object8,
-        object9,
-      ],
+      passedObjects,
     );
 
     return mapper.map(
-      args[0],
-      args[1],
-      args[2],
-      args[3],
-      args[4],
-      args[5],
-      args[6],
-      args[7],
-      args[8],
+      passedObjects[args[0]!],
+      passedObjects[args[1]!],
+      passedObjects[args[2]!],
+      passedObjects[args[3]!],
+      passedObjects[args[4]!],
+      passedObjects[args[5]!],
+      passedObjects[args[6]!],
+      passedObjects[args[7]!],
+      passedObjects[args[8]!],
     );
   }
 
@@ -464,17 +482,28 @@ class MapsterImpl implements Mapster {
     return mapper;
   }
 
-  Map<int, Object> _sortArgs<M extends Mapper>(
+  Map<int, int> _sortArgs<M extends Mapper>(
     M mapper,
     List<Type> neededFromTypes,
     List passedObjects,
   ) {
-    final args = <int, Object>{};
+    final args = <int, int>{};
     for (var i = 0; i < mapper.fromTypes.length; i++) {
       final type = mapper.fromTypes[i];
-      final index = neededFromTypes.indexWhere((e) => e == type);
 
-      args[i] = passedObjects[index];
+      var startIndex = 0;
+      var index = -1;
+      while (true) {
+        index = neededFromTypes.indexWhere((e) => e == type, startIndex);
+
+        if (args.values.contains(index)) {
+          startIndex = index + 1;
+        } else {
+          break;
+        }
+      }
+
+      args[i] = index;
     }
 
     return args;
