@@ -10,6 +10,7 @@ Mapster is an object mapping library.
 - [Other features](#other-features)
     - [registerAll](#registerall)
     - [Redefine Mapper](#redefine-mapper)
+- [Work with injectable](#work-with-injectable)
 
 ## How to use
 
@@ -272,3 +273,43 @@ void main(Mapster mapster) {
   final user2 = mapster.map(userResponse1, to<User>);
 }
 ```
+
+## Work with injectable
+
+If you use [injectable](https://pub.dev/packages/injectable) package, you can register `Mapster`
+and `Mapper`s like that:
+
+```dart
+@module
+class MapsterModule {
+  @singleton
+  Mapster get mapster => Mapster();
+}
+
+@singleton
+class MapsterRegistrar {
+  const MapsterRegistrar(this._mapster);
+
+  final Mapster _mapster;
+
+  @postConstruct
+  void register() {
+    _mediator.registerAll(
+      [
+        UserToUserResponseMapper(),
+        UserUserPostToLikedPostNotification(),
+      ],
+    );
+  }
+}
+```
+
+We won't use `MapsterRegistrar` class. But it's useful to us, because `@singleton`s can
+have `@postConstruct` method. So, this way, we can register `Mapster` and all our `Mapper`s
+in `get_it`.
+
+If you use feature-first or layer-first approach in you project, you can declare
+multiple `MapsterRegistrar` in multiple places with the same name, but do NOT try to
+get `MapsterRegister` from `get_it`, if you creates multiple `MasterRegistrar` with the same name,
+because it can cause a problem. Remember, that we do not need to get `MapsterRegistrar`, we creates
+it only to use `@postConstruct`.
