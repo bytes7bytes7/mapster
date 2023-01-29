@@ -2,6 +2,15 @@
 
 Mapster is an object mapping library.
 
+- [How to use](#how-to-use)
+- [Map functions](#map-functions)
+- [Pros & Cons](#pros--cons)
+    - [Pros](#pros)
+    - [Cons](#cons)
+- [Other features](#other-features)
+    - [registerAll](#registerall)
+    - [Redefine Mapper](#redefine-mapper)
+
 ## How to use
 
 1. Extend one of `Mapper` classes. There are 9 types: `OneSourceMapper`, `TwoSourcesMapper`, ...
@@ -171,7 +180,9 @@ void main() {
 }
 ```
 
-## Pros
+## Pros & Cons
+
+### Pros
 
 - Do not need to specify types.
 - Mapster package has no dependency
@@ -183,6 +194,49 @@ void main() {
 - Ability to specify mappers in a one place
 - Ability to redefine mappers
 
-## Cons
+### Cons
 
 - Mapster has O(n^2) time complexity of ordering arguments before passing them to a Mapper
+
+## Other features
+
+### registerAll
+
+You can register multiple `Mapper`s using `registerAll` method, like that:
+
+```dart
+void main() {
+  final mapster = Mapster()
+    ..registerAll(
+      const [
+        UserToUserResponseMapper(),
+        UserUserPostToLikedPostNotification(),
+      ],
+    );
+}
+```
+
+### Redefine Mapper
+
+You can redefine `Mapper` by calling register/registerAll again, like that:
+
+```dart
+
+void main(Mapster mapster) {
+  // Register Mapper with input type: User, and output type: UserResponse
+  mapster.register(const UserToUserResponseMapper());
+
+  final userResponse1 = mapster.map(user, to<UserResponse>);
+
+
+  // Register another Mapper with the same types: 
+  // input type: User, and output type: UserResponse
+  mapster.register(const AnotherUserToUserResponseMapper());
+
+  final userResponse2 = mapster.map(user, to<UserResponse>);
+}
+```
+
+`Mapster` stores `Mapper`s based on its source types and result type. If new `Mapper` has the same
+set of input types and the same output type as the old `Mapper`, then `Mapster` replaces old one
+with a new one.
