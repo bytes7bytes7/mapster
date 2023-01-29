@@ -1,5 +1,6 @@
 import 'mapper.dart';
 
+/// [Mapper] with 2 source objects.
 abstract class TwoSourcesMapper<FROM1, FROM2, TO> implements Mapper {
   const TwoSourcesMapper();
 

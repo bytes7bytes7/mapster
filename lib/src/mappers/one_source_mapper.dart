@@ -1,5 +1,6 @@
 import 'mapper.dart';
 
+/// [Mapper] with 1 source object.
 abstract class OneSourceMapper<FROM, TO> implements Mapper {
   const OneSourceMapper();
 

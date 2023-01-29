@@ -1,6 +1,4 @@
-import '../mappers/mappers.dart';
-import 'exceptions/exceptions.dart';
-import 'mapster.dart';
+part of 'mapster.dart';
 
 bool _listEquals<T>(List<T> lst1, List<T> lst2) {
   for (final e1 in lst1) {
@@ -12,7 +10,7 @@ bool _listEquals<T>(List<T> lst1, List<T> lst2) {
   return true;
 }
 
-class MapsterImpl implements Mapster {
+class _MapsterImpl implements Mapster {
   final _mappers = <Mapper>[];
 
   @override

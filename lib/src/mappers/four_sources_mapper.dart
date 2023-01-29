@@ -1,5 +1,6 @@
 import 'mapper.dart';
 
+/// [Mapper] with 4 source objects.
 abstract class FourSourcesMapper<FROM1, FROM2, FROM3, FROM4, TO>
     implements Mapper {
   const FourSourcesMapper();

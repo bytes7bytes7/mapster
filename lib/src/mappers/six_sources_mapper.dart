@@ -1,5 +1,6 @@
 import 'mapper.dart';
 
+/// [Mapper] with 6 source objects.
 abstract class SixSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, TO>
     implements Mapper {
   const SixSourcesMapper();
