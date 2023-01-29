@@ -48,6 +48,8 @@ class MockAnotherAToBMapper extends Mock implements OneSourceMapper<A, B> {}
 
 class MockAAndCToDMapper extends Mock implements TwoSourcesMapper<A, C, D> {}
 
+class MockCAndAToDMapper extends Mock implements TwoSourcesMapper<C, A, D> {}
+
 void main() {
   late Mapster mapster;
   late OneSourceMapper<A, B> aToBMapper;
@@ -56,11 +58,15 @@ void main() {
   late OneSourceMapper<E, B> eToBMapper;
   late OneSourceMapper<A, B> anotherAToBMapper;
   late TwoSourcesMapper<A, C, D> aAndCToDMapper;
-  const dummyB = B('1');
-  const anotherDummyB = B('2');
+  late TwoSourcesMapper<C, A, D> cAndAToDMapper;
+  const stubB = B('1');
+  const anotherStubB = B('2');
+  const stubD = D(1, 'name');
+  const anotherStubD = D(2, 'name2');
 
   setUpAll(() {
     registerFallbackValue(A(1));
+    registerFallbackValue(C('name'));
   });
 
   setUp(() {
@@ -71,6 +77,7 @@ void main() {
     eToBMapper = MockEToBMapper();
     anotherAToBMapper = MockAnotherAToBMapper();
     aAndCToDMapper = MockAAndCToDMapper();
+    cAndAToDMapper = MockCAndAToDMapper();
   });
 
   test(
@@ -88,7 +95,7 @@ void main() {
   test(
     'Mapster does NOT throw when proper Mapper is registered.',
     () {
-      when(() => aToBMapper.map(any())).thenReturn(dummyB);
+      when(() => aToBMapper.map(any())).thenReturn(stubB);
       when(() => aToBMapper.fromTypes).thenReturn([A]);
       when(() => aToBMapper.toType).thenReturn(B);
 
@@ -123,7 +130,7 @@ void main() {
     'Mapster does NOT throw when some Mappers are registered, '
     'and the proper one is too.',
     () {
-      when(() => aToBMapper.map(any())).thenReturn(dummyB);
+      when(() => aToBMapper.map(any())).thenReturn(stubB);
       when(() => aToBMapper.fromTypes).thenReturn([A]);
       when(() => aToBMapper.toType).thenReturn(B);
       when(() => aAndCToDMapper.fromTypes).thenReturn([A, C]);
@@ -147,7 +154,7 @@ void main() {
   test(
     'Mapster maps one object to another.',
     () {
-      when(() => aToBMapper.map(any())).thenReturn(dummyB);
+      when(() => aToBMapper.map(any())).thenReturn(stubB);
       when(() => aToBMapper.fromTypes).thenReturn([A]);
       when(() => aToBMapper.toType).thenReturn(B);
 
@@ -158,7 +165,7 @@ void main() {
 
       expect(
         result,
-        dummyB,
+        stubB,
       );
     },
   );
@@ -166,7 +173,7 @@ void main() {
   test(
     'Mapster finds a proper Mapper and maps one object to another.',
     () {
-      when(() => aToBMapper.map(any())).thenReturn(dummyB);
+      when(() => aToBMapper.map(any())).thenReturn(stubB);
       when(() => aToBMapper.fromTypes).thenReturn([A]);
       when(() => aToBMapper.toType).thenReturn(B);
       when(() => aAndCToDMapper.fromTypes).thenReturn([A, C]);
@@ -184,7 +191,7 @@ void main() {
 
       expect(
         result,
-        dummyB,
+        stubB,
       );
     },
   );
@@ -192,7 +199,7 @@ void main() {
   test(
     'Mapster finds a proper Mapper and maps one object to another.',
     () {
-      when(() => aToBMapper.map(any())).thenReturn(dummyB);
+      when(() => aToBMapper.map(any())).thenReturn(stubB);
       when(() => aToBMapper.fromTypes).thenReturn([A]);
       when(() => aToBMapper.toType).thenReturn(B);
       when(() => aAndCToDMapper.fromTypes).thenReturn([A, C]);
@@ -210,7 +217,7 @@ void main() {
 
       expect(
         result,
-        dummyB,
+        stubB,
       );
     },
   );
@@ -221,7 +228,7 @@ void main() {
     'input types set of 2nd Mapper and also output type of 1st Mapper is not equal '
     'to output type of 2nd Mapper.',
     () {
-      when(() => aToBMapper.map(any())).thenReturn(dummyB);
+      when(() => aToBMapper.map(any())).thenReturn(stubB);
       when(() => aToBMapper.fromTypes).thenReturn([A]);
       when(() => aToBMapper.toType).thenReturn(B);
       when(() => bToAMapper.fromTypes).thenReturn([B]);
@@ -246,7 +253,7 @@ void main() {
     'Mapster identifies mappers with the same set of input types, but '
     'different output type as different mappers.',
     () {
-      when(() => aToBMapper.map(any())).thenReturn(dummyB);
+      when(() => aToBMapper.map(any())).thenReturn(stubB);
       when(() => aToBMapper.fromTypes).thenReturn([A]);
       when(() => aToBMapper.toType).thenReturn(B);
       when(() => aToEMapper.fromTypes).thenReturn([A]);
@@ -271,7 +278,7 @@ void main() {
     'Mapster identifies mappers with the same output type, but '
     'different input types as different mappers.',
     () {
-      when(() => aToBMapper.map(any())).thenReturn(dummyB);
+      when(() => aToBMapper.map(any())).thenReturn(stubB);
       when(() => aToBMapper.fromTypes).thenReturn([A]);
       when(() => aToBMapper.toType).thenReturn(B);
       when(() => eToBMapper.fromTypes).thenReturn([B]);
@@ -298,10 +305,10 @@ void main() {
     () {
       when(() => aToBMapper.fromTypes).thenReturn([A]);
       when(() => aToBMapper.toType).thenReturn(B);
-      when(() => aToBMapper.map(any())).thenReturn(dummyB);
+      when(() => aToBMapper.map(any())).thenReturn(stubB);
       when(() => anotherAToBMapper.fromTypes).thenReturn([A]);
       when(() => anotherAToBMapper.toType).thenReturn(B);
-      when(() => anotherAToBMapper.map(any())).thenReturn(anotherDummyB);
+      when(() => anotherAToBMapper.map(any())).thenReturn(anotherStubB);
 
       const a = A(1);
       mapster.registerAll(
@@ -315,7 +322,37 @@ void main() {
 
       expect(
         result,
-        anotherDummyB,
+        anotherStubB,
+      );
+    },
+  );
+
+  test(
+    'Mapster identifies mappers with the same set of input types '
+    '(multiple input types in different order), and '
+    'the same output type as interchangeable mappers.',
+    () {
+      when(() => aAndCToDMapper.fromTypes).thenReturn([A, C]);
+      when(() => aAndCToDMapper.toType).thenReturn(D);
+      when(() => aAndCToDMapper.map(any(), any())).thenReturn(stubD);
+      when(() => cAndAToDMapper.fromTypes).thenReturn([C, A]);
+      when(() => cAndAToDMapper.toType).thenReturn(D);
+      when(() => cAndAToDMapper.map(any(), any())).thenReturn(anotherStubD);
+
+      const a = A(1);
+      const c = C('name');
+      mapster.registerAll(
+        [
+          aAndCToDMapper,
+          cAndAToDMapper,
+        ],
+      );
+
+      final result = mapster.map2(a, c, to<D>);
+
+      expect(
+        result,
+        anotherStubD,
       );
     },
   );
