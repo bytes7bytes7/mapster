@@ -1,3 +1,6 @@
+[English](https://github.com/bytes7bytes7/mapster/blob/master/README.md)
+| [Русский](https://github.com/bytes7bytes7/mapster/blob/master/resources/l10n/ru_RU/README.md)
+
 # Mapster
 
 Mapster is an object mapping library.
@@ -41,7 +44,7 @@ void main() {
 }
 ```
 
-3. Register all your mappers in created instance of `Mapster`.
+3. Register all your `Mapper`s in created instance of `Mapster`.
 
 ```dart
 void main() {
@@ -112,13 +115,13 @@ void main() {
     text: "The philosopher's stone",
   );
 
-  // You can swap source objects, the result will be the same
+  // You can swap source objects, the result will be the same.
   final postResponse1 = mapster.map2(user, post, to<PostResponse>);
   final postResponse2 = mapster.map2(post, user, to<PostResponse>);
 }
 ```
 
-Be aware of `Mapper`s with multiple source objects of the same type. Under the hood, `Mapster`
+Beware of `Mapper`s with multiple source objects of the same type. Under the hood, `Mapster`
 matches all input objects in order they are passed. For example, let's look at this code:
 
 ```dart
@@ -192,8 +195,8 @@ void main() {
 - Do not need to inject your classes/functions with large amount of mappers anymore. Just inject
   with `Mapster`
 - Do not need to worry about the order of parameters
-- Do not need to know a specific mapper to map
-- Ability to specify mappers in a one place
+- Do not need to know a specific `Mapper` to map
+- Ability to specify `Mapper`s in a one place
 - Ability to redefine `Mapper`s
 
 ### Cons
@@ -230,13 +233,13 @@ void main(Mapster mapster) {
     lastName: 'Potter',
   );
 
-  // Register Mapper with input type: User, and output type: UserResponse
+  // Register Mapper with input type: User, and output type: UserResponse.
   mapster.register(const UserToUserResponseMapper());
 
   final userResponse1 = mapster.map(user, to<UserResponse>);
 
   // Register another Mapper with the same types: 
-  // input type: User, and output type: UserResponse
+  // input type: User, and output type: UserResponse.
   mapster.register(const AnotherUserToUserResponseMapper());
 
   final userResponse2 = mapster.map(user, to<UserResponse>);
@@ -255,13 +258,13 @@ void main(Mapster mapster) {
     lastName: 'Potter',
   );
 
-  // Register Mapper with input type: User, and output type: UserResponse
+  // Register Mapper with input type: User, and output type: UserResponse.
   mapster.register(const UserToUserResponseMapper());
 
   final userResponse1 = mapster.map(user, to<UserResponse>);
 
   // Register another Mapper with swapped result and input types: 
-  // input type: UserResponse, and output type: User
+  // input type: UserResponse, and output type: User.
   mapster.register(const UserResponseToUserMapper());
 
   // Because input types set of the 1st Mapper contains
