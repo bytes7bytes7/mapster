@@ -173,7 +173,8 @@ void main() {
   with Mapster
 - Do not need to worry about the order of parameters
 - Do not need to know a specific mapper to map
-- Specify mappers in a one place
+- Ability to specify mappers in a one place
+- Ability to redefine mappers
 
 ## Cons
 

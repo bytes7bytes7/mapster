@@ -16,7 +16,10 @@ class _MapsterImpl implements Mapster {
   }
 
   @override
-  TO map<FROM, TO>(FROM object) {
+  TO map<FROM, TO>(
+    FROM object,
+    TOCreator<TO> _,
+  ) {
     final neededFromTypes = [FROM];
 
     final mapper = _findMapper<OneSourceMapper>(

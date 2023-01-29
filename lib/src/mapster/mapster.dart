@@ -5,6 +5,14 @@ import 'exceptions/exceptions.dart';
 
 part 'mapster_impl.dart';
 
+/// Type of function that creates [TO]
+typedef TOCreator<TO> = TO Function();
+
+/// Very helpful function for [Mapster]
+/// Do NOT call it (because it throws),
+/// just pass it to one of [Mapster]'s `map` function.
+TO fakeCreator<TO>() => throw Exception();
+
 /// Class that contains all registered [Mapper]
 /// and use the proper [Mapper] for mapping
 /// based on types.
@@ -27,6 +35,7 @@ abstract class Mapster {
   /// Map 1 object of type [FROM] to another object of type [TO].
   TO map<FROM, TO>(
     FROM object,
+    TOCreator<TO> _,
   );
 
   /// Map 2 objects of types [FROM1], [FROM2] to another object of type [TO].
