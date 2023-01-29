@@ -2,11 +2,7 @@
 
 import 'package:mapster/mapster.dart';
 
-import 'models/liked_post_notification.dart';
-import 'models/post.dart';
-import 'models/post_response.dart';
-import 'models/user.dart';
-import 'models/user_response.dart';
+import 'models/models.dart';
 
 class UserToUserResponseMapper extends OneSourceMapper<User, UserResponse> {
   const UserToUserResponseMapper();
