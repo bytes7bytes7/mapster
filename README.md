@@ -73,10 +73,10 @@ should `Mapster` return.
 
 ## Map functions
 
-`Mapster` has 9 `map` methods: `map`, `map2`, ... , `map9`. All of them get all source objects and
+`Mapster` has 9 `map` methods: `map`, `map2`, ... , `map9`. All of them get source objects and
 then `to<YourResultType>`.
 
-You can swap source objects in `Mapster`'s `map` methods as you wish. You do not need to check the
+You can pass source objects to `Mapster`'s `map` methods in any order. You do not need to check the
 order of input objects in signature of certain `Mapper` every time. `Mapster` is smart enough to
 find a proper `Mapper`.
 
@@ -184,19 +184,20 @@ void main() {
 
 ### Pros
 
-- Do not need to specify types.
-- Mapster package has no dependency
-- Mapster has O(1) time complexity of search for a proper Mapper
+- Do not need to specify types in `<>` during using `register`, `registerAll`, and `map` functions
+  of `Mapster`.
+- `Mapster` package has no dependency
+- `Mapster` has O(1) time complexity of searching for a proper `Mapper`
 - Do not need to inject your classes/functions with large amount of mappers anymore. Just inject
-  with Mapster
+  with `Mapster`
 - Do not need to worry about the order of parameters
 - Do not need to know a specific mapper to map
 - Ability to specify mappers in a one place
-- Ability to redefine mappers
+- Ability to redefine `Mapper`s
 
 ### Cons
 
-- Mapster has O(n^2) time complexity of ordering arguments before passing them to a Mapper
+- `Mapster` has O(n^2) time complexity of ordering arguments before passing them to a `Mapper`
 
 ## Other features
 
@@ -218,7 +219,7 @@ void main() {
 
 ### Redefine Mapper
 
-You can redefine `Mapper` by calling register/registerAll again, like that:
+You can redefine `Mapper` by calling `register`/`registerAll` again, like that:
 
 ```dart
 void main(Mapster mapster) {
