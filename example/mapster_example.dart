@@ -122,10 +122,47 @@ void threeSourcesExample(Mapster mapster) {
   print(notification2);
 }
 
+class AnotherUserToUserResponseMapper
+    extends OneSourceMapper<User, UserResponse> {
+  const AnotherUserToUserResponseMapper();
+
+  @override
+  UserResponse map(User object) {
+    return UserResponse(
+      id: object.id,
+      fullName: '${object.lastName} ${object.firstName}',
+    );
+  }
+}
+
+void redefineOneSourceExample(Mapster mapster) {
+  const user = User(
+    id: 1,
+    firstName: 'Harry',
+    lastName: 'Potter',
+  );
+
+  mapster.register(const UserToUserResponseMapper());
+
+  final userResponse1 = mapster.map<User, UserResponse>(user);
+
+  // You can redefine mappers
+  // Mapster stores Mappers based on its source types and result type.
+  // If new Mapper has the same set of input types and the same output type as
+  // the old Mapper, then Mapster replaces old one with a new one.
+  mapster.register(const AnotherUserToUserResponseMapper());
+
+  final userResponse2 = mapster.map<User, UserResponse>(user);
+
+  print(userResponse1);
+  print(userResponse2);
+}
+
 void main() {
   final mapster = Mapster();
 
   oneSourceExample(mapster);
   twoSourcesExample(mapster);
   threeSourcesExample(mapster);
+  redefineOneSourceExample(mapster);
 }

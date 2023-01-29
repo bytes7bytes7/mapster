@@ -164,3 +164,17 @@ void main() {
   );
 }
 ```
+
+## Pros
+
+- Mapster package has no dependency
+- Mapster has O(1) time complexity of search for a proper Mapper
+- Do not need to inject your classes/functions with large amount of mappers anymore. Just inject
+  with Mapster
+- Do not need to worry about the order of parameters
+- Do not need to know a specific mapper to map
+- Specify mappers in a one place
+
+## Cons
+
+- Mapster has O(n^2) time complexity of ordering arguments before passing them to a Mapper

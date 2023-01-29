@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import '../mappers/mappers.dart';
 import 'exceptions/exceptions.dart';
 
@@ -11,6 +13,9 @@ abstract class Mapster {
 
   /// Use this method to register your [Mapper]
   /// before using [Mapster].
+  /// [Mapster] stores [Mapper]s based on its source types and result type.
+  /// If new [Mapper] has the same set of input types and the same output type as
+  /// the old [Mapper], then [Mapster] replaces old one with a new one.
   /// You can register multiple [Mapper]s at one.
   /// For this check [registerAll].
   void register(Mapper mapper);
