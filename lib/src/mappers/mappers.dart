@@ -1,3 +1,10 @@
+export 'eight_sources_mapper.dart';
+export 'five_sources_mapper.dart';
+export 'four_sources_mapper.dart';
 export 'mapper.dart';
+export 'nine_sources_mapper.dart';
 export 'one_source_mapper.dart';
+export 'seven_sources_mapper.dart';
+export 'six_sources_mapper.dart';
+export 'three_sources_mapper.dart';
 export 'two_sources_mapper.dart';

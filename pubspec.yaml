@@ -1,5 +1,5 @@
 name: mapster
-description: Object mapping
+description: Object mapping package.
 version: 1.0.0
 
 environment:

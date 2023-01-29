@@ -1,4 +1,4 @@
-import 'mappers/mappers.dart';
+import '../mappers/mappers.dart';
 
 class Mapster {
   final _mappers = <Mapper>[];
@@ -18,7 +18,7 @@ class Mapster {
     }
 
     if (mapper == null) {
-      throw Exception('Mapper not found');
+      throw Exception('Mapper<$FROM, $TO> is not registered');
     }
 
     return mapper.map(object);
@@ -48,6 +48,6 @@ class Mapster {
       return mapper2.map(object2, object1);
     }
 
-    throw Exception('Mapper not found');
+    throw Exception('Mapper<$FROM1, $FROM2, $TO> is not registered');
   }
 }
