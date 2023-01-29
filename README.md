@@ -238,5 +238,5 @@ void main(Mapster mapster) {
 ```
 
 `Mapster` stores `Mapper`s based on its source types and result type. If new `Mapper` has the same
-set of input types and the same output type as the old `Mapper`, then `Mapster` replaces old one
-with a new one.
+set of input types (an order of input types does NOT matter) and the same output type as the
+old `Mapper`, then `Mapster` replaces old one with a new one.

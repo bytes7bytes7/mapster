@@ -1,7 +1,7 @@
 part of 'mapster.dart';
 
 class _MapsterImpl implements Mapster {
-  final _mappers = HashMap<int, Mapper>();
+  final _mappers = HashMap<String, Mapper>();
 
   @override
   void register(Mapper mapper) {
@@ -452,8 +452,9 @@ class _MapsterImpl implements Mapster {
     );
   }
 
-  int _getMapperUid(Type toType, List<Type> fromTypes) {
-    return toType.hashCode ^ fromTypes.fold(0, (r, e) => r ^ e.hashCode);
+  String _getMapperUid(Type toType, List<Type> fromTypes) {
+    return '${toType.hashCode} '
+        '${fromTypes.fold<int>(0, (r, e) => r ^ e.hashCode)}';
   }
 
   M? _findMapper<M extends Mapper>(
