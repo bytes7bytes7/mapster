@@ -1,6 +1,8 @@
 name: mapster
 description: Object mapping package that allows you easily register all Mappers and use them later through Mapster.
 version: 0.0.1
+homepage: https://github.com/bytes7bytes7/mapster
+repository: https://github.com/bytes7bytes7/mapster
 
 environment:
   sdk: '>=2.17.0 <3.0.0'
