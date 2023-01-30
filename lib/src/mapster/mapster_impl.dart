@@ -500,19 +500,19 @@ class _MapsterImpl implements Mapster {
   ) {
     final mapper = _mappers[_getMapperUid(neededToType, neededFromTypes)];
 
-    if (mapper is M?) {
+    if (mapper is M) {
       return mapper;
     }
 
     return null;
   }
 
-  Map<int, int> _sortArgs<M extends Mapper>(
+  HashMap<int, int> _sortArgs<M extends Mapper>(
     M mapper,
     List<Type> neededFromTypes,
   ) {
     final fromTypes = List.from(neededFromTypes);
-    final args = <int, int>{};
+    final args = HashMap<int, int>();
 
     for (var i = 0; i < mapper.fromTypes.length; i++) {
       final type = mapper.fromTypes[i];
