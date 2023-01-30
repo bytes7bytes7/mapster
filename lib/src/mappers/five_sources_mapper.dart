@@ -1,8 +1,13 @@
 import 'mapper.dart';
 
 /// [Mapper] with 5 source objects.
-abstract class FiveSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, TO>
-    implements Mapper {
+abstract class FiveSourcesMapper<
+    FROM1 extends Object,
+    FROM2 extends Object,
+    FROM3 extends Object,
+    FROM4 extends Object,
+    FROM5 extends Object,
+    TO extends Object> implements Mapper {
   const FiveSourcesMapper();
 
   TO map(

@@ -16,7 +16,7 @@ class _MapsterImpl implements Mapster {
   }
 
   @override
-  TO map<FROM, TO>(
+  TO map<FROM extends Object, TO extends Object>(
     FROM object,
     TOCreator<TO> _,
   ) {
@@ -40,11 +40,11 @@ class _MapsterImpl implements Mapster {
 
     return mapper.map(
       passedObjects.removeAt(args[0]!),
-    );
+    ) as TO;
   }
 
   @override
-  TO map2<FROM1, FROM2, TO>(
+  TO map2<FROM1 extends Object, FROM2 extends Object, TO extends Object>(
     FROM1 object1,
     FROM2 object2,
     TOCreator<TO> _,
@@ -76,11 +76,12 @@ class _MapsterImpl implements Mapster {
     return mapper.map(
       passedObjects.removeAt(args[0]!),
       passedObjects.removeAt(args[1]!),
-    );
+    ) as TO;
   }
 
   @override
-  TO map3<FROM1, FROM2, FROM3, TO>(
+  TO map3<FROM1 extends Object, FROM2 extends Object, FROM3 extends Object,
+      TO extends Object>(
     FROM1 object1,
     FROM2 object2,
     FROM3 object3,
@@ -116,11 +117,12 @@ class _MapsterImpl implements Mapster {
       passedObjects.removeAt(args[0]!),
       passedObjects.removeAt(args[1]!),
       passedObjects.removeAt(args[2]!),
-    );
+    ) as TO;
   }
 
   @override
-  TO map4<FROM1, FROM2, FROM3, FROM4, TO>(
+  TO map4<FROM1 extends Object, FROM2 extends Object, FROM3 extends Object,
+      FROM4 extends Object, TO extends Object>(
     FROM1 object1,
     FROM2 object2,
     FROM3 object3,
@@ -161,11 +163,12 @@ class _MapsterImpl implements Mapster {
       passedObjects.removeAt(args[1]!),
       passedObjects.removeAt(args[2]!),
       passedObjects.removeAt(args[3]!),
-    );
+    ) as TO;
   }
 
   @override
-  TO map5<FROM1, FROM2, FROM3, FROM4, FROM5, TO>(
+  TO map5<FROM1 extends Object, FROM2 extends Object, FROM3 extends Object,
+      FROM4 extends Object, FROM5 extends Object, TO extends Object>(
     FROM1 object1,
     FROM2 object2,
     FROM3 object3,
@@ -210,11 +213,18 @@ class _MapsterImpl implements Mapster {
       passedObjects.removeAt(args[2]!),
       passedObjects.removeAt(args[3]!),
       passedObjects.removeAt(args[4]!),
-    );
+    ) as TO;
   }
 
   @override
-  TO map6<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, TO>(
+  TO map6<
+      FROM1 extends Object,
+      FROM2 extends Object,
+      FROM3 extends Object,
+      FROM4 extends Object,
+      FROM5 extends Object,
+      FROM6 extends Object,
+      TO extends Object>(
     FROM1 object1,
     FROM2 object2,
     FROM3 object3,
@@ -263,11 +273,19 @@ class _MapsterImpl implements Mapster {
       passedObjects.removeAt(args[3]!),
       passedObjects.removeAt(args[4]!),
       passedObjects.removeAt(args[5]!),
-    );
+    ) as TO;
   }
 
   @override
-  TO map7<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7, TO>(
+  TO map7<
+      FROM1 extends Object,
+      FROM2 extends Object,
+      FROM3 extends Object,
+      FROM4 extends Object,
+      FROM5 extends Object,
+      FROM6 extends Object,
+      FROM7 extends Object,
+      TO extends Object>(
     FROM1 object1,
     FROM2 object2,
     FROM3 object3,
@@ -321,11 +339,20 @@ class _MapsterImpl implements Mapster {
       passedObjects.removeAt(args[4]!),
       passedObjects.removeAt(args[5]!),
       passedObjects.removeAt(args[6]!),
-    );
+    ) as TO;
   }
 
   @override
-  TO map8<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7, FROM8, TO>(
+  TO map8<
+      FROM1 extends Object,
+      FROM2 extends Object,
+      FROM3 extends Object,
+      FROM4 extends Object,
+      FROM5 extends Object,
+      FROM6 extends Object,
+      FROM7 extends Object,
+      FROM8 extends Object,
+      TO extends Object>(
     FROM1 object1,
     FROM2 object2,
     FROM3 object3,
@@ -383,11 +410,21 @@ class _MapsterImpl implements Mapster {
       passedObjects.removeAt(args[5]!),
       passedObjects.removeAt(args[6]!),
       passedObjects.removeAt(args[7]!),
-    );
+    ) as TO;
   }
 
   @override
-  TO map9<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7, FROM8, FROM9, TO>(
+  TO map9<
+      FROM1 extends Object,
+      FROM2 extends Object,
+      FROM3 extends Object,
+      FROM4 extends Object,
+      FROM5 extends Object,
+      FROM6 extends Object,
+      FROM7 extends Object,
+      FROM8 extends Object,
+      FROM9 extends Object,
+      TO extends Object>(
     FROM1 object1,
     FROM2 object2,
     FROM3 object3,
@@ -449,7 +486,7 @@ class _MapsterImpl implements Mapster {
       passedObjects.removeAt(args[6]!),
       passedObjects.removeAt(args[7]!),
       passedObjects.removeAt(args[8]!),
-    );
+    ) as TO;
   }
 
   String _getMapperUid(Type toType, List<Type> fromTypes) {

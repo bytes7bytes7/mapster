@@ -16,7 +16,7 @@ typedef TOCreator<TO> = TO Function();
 /// ```dart
 /// final result = mapster.map(user, to<Result>);
 /// ```
-TO to<TO>() => throw Exception(
+TO to<TO extends Object>() => throw Exception(
       'Do NOT call this function. '
       'You probably use `to<SomeType>()`. '
       'If so, remove parenthesis like that: `to<SomeType>`',
@@ -42,13 +42,13 @@ abstract class Mapster {
   void registerAll(List<Mapper> mappers);
 
   /// Map 1 object of type [FROM] to another object of type [TO].
-  TO map<FROM, TO>(
+  TO map<FROM extends Object, TO extends Object>(
     FROM object,
     TOCreator<TO> _,
   );
 
   /// Map 2 objects of types [FROM1], [FROM2] to another object of type [TO].
-  TO map2<FROM1, FROM2, TO>(
+  TO map2<FROM1 extends Object, FROM2 extends Object, TO extends Object>(
     FROM1 object1,
     FROM2 object2,
     TOCreator<TO> _,
@@ -56,7 +56,8 @@ abstract class Mapster {
 
   /// Map 3 objects of types [FROM1], [FROM2], [FROM3]
   /// to another object of type [TO].
-  TO map3<FROM1, FROM2, FROM3, TO>(
+  TO map3<FROM1 extends Object, FROM2 extends Object, FROM3 extends Object,
+      TO extends Object>(
     FROM1 object1,
     FROM2 object2,
     FROM3 object3,
@@ -65,7 +66,8 @@ abstract class Mapster {
 
   /// Map 4 objects of types [FROM1], [FROM2], [FROM3], [FROM4]
   /// to another object of type [TO].
-  TO map4<FROM1, FROM2, FROM3, FROM4, TO>(
+  TO map4<FROM1 extends Object, FROM2 extends Object, FROM3 extends Object,
+      FROM4 extends Object, TO extends Object>(
     FROM1 object1,
     FROM2 object2,
     FROM3 object3,
@@ -75,7 +77,8 @@ abstract class Mapster {
 
   /// Map 5 objects of types [FROM1], [FROM2], [FROM3], [FROM4], [FROM5]
   /// to another object of type [TO].
-  TO map5<FROM1, FROM2, FROM3, FROM4, FROM5, TO>(
+  TO map5<FROM1 extends Object, FROM2 extends Object, FROM3 extends Object,
+      FROM4 extends Object, FROM5 extends Object, TO extends Object>(
     FROM1 object1,
     FROM2 object2,
     FROM3 object3,
@@ -86,7 +89,14 @@ abstract class Mapster {
 
   /// Map 6 objects of types [FROM1], [FROM2], [FROM3], [FROM4], [FROM5],
   /// [FROM6] to another object of type [TO].
-  TO map6<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, TO>(
+  TO map6<
+      FROM1 extends Object,
+      FROM2 extends Object,
+      FROM3 extends Object,
+      FROM4 extends Object,
+      FROM5 extends Object,
+      FROM6 extends Object,
+      TO extends Object>(
     FROM1 object1,
     FROM2 object2,
     FROM3 object3,
@@ -98,7 +108,15 @@ abstract class Mapster {
 
   /// Map 7 objects of types [FROM1], [FROM2], [FROM3], [FROM4], [FROM5],
   /// [FROM6], [FROM7] to another object of type [TO].
-  TO map7<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7, TO>(
+  TO map7<
+      FROM1 extends Object,
+      FROM2 extends Object,
+      FROM3 extends Object,
+      FROM4 extends Object,
+      FROM5 extends Object,
+      FROM6 extends Object,
+      FROM7 extends Object,
+      TO extends Object>(
     FROM1 object1,
     FROM2 object2,
     FROM3 object3,
@@ -111,7 +129,16 @@ abstract class Mapster {
 
   /// Map 8 objects of types [FROM1], [FROM2], [FROM3], [FROM4], [FROM5],
   /// [FROM6], [FROM7], [FROM8] to another object of type [TO].
-  TO map8<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7, FROM8, TO>(
+  TO map8<
+      FROM1 extends Object,
+      FROM2 extends Object,
+      FROM3 extends Object,
+      FROM4 extends Object,
+      FROM5 extends Object,
+      FROM6 extends Object,
+      FROM7 extends Object,
+      FROM8 extends Object,
+      TO extends Object>(
     FROM1 object1,
     FROM2 object2,
     FROM3 object3,
@@ -125,7 +152,17 @@ abstract class Mapster {
 
   /// Map 9 objects of types [FROM1], [FROM2], [FROM3], [FROM4], [FROM5],
   /// [FROM6], [FROM7], [FROM8], [FROM9] to another object of type [TO].
-  TO map9<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7, FROM8, FROM9, TO>(
+  TO map9<
+      FROM1 extends Object,
+      FROM2 extends Object,
+      FROM3 extends Object,
+      FROM4 extends Object,
+      FROM5 extends Object,
+      FROM6 extends Object,
+      FROM7 extends Object,
+      FROM8 extends Object,
+      FROM9 extends Object,
+      TO extends Object>(
     FROM1 object1,
     FROM2 object2,
     FROM3 object3,
