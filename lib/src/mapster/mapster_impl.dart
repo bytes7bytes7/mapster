@@ -18,13 +18,13 @@ class _MapsterImpl implements Mapster {
   @override
   TO map<FROM extends Object, TO extends Object>(
     FROM object,
-    To<TO> toCreator,
+    To<TO> to,
   ) {
     final neededFromTypes = [FROM];
 
     final mapper = _findMapper<OneSourceMapper>(
       neededFromTypes,
-      toCreator,
+      to,
     );
 
     if (mapper == null) {
@@ -47,7 +47,7 @@ class _MapsterImpl implements Mapster {
   TO map2<FROM1 extends Object, FROM2 extends Object, TO extends Object>(
     FROM1 object1,
     FROM2 object2,
-    To<TO> toCreator,
+    To<TO> to,
   ) {
     final neededFromTypes = [
       FROM1,
@@ -56,7 +56,7 @@ class _MapsterImpl implements Mapster {
 
     final mapper = _findMapper<TwoSourcesMapper>(
       neededFromTypes,
-      toCreator,
+      to,
     );
 
     if (mapper == null) {
@@ -85,7 +85,7 @@ class _MapsterImpl implements Mapster {
     FROM1 object1,
     FROM2 object2,
     FROM3 object3,
-    To<TO> toCreator,
+    To<TO> to,
   ) {
     final neededFromTypes = [
       FROM1,
@@ -95,7 +95,7 @@ class _MapsterImpl implements Mapster {
 
     final mapper = _findMapper<ThreeSourcesMapper>(
       neededFromTypes,
-      toCreator,
+      to,
     );
 
     if (mapper == null) {
@@ -127,7 +127,7 @@ class _MapsterImpl implements Mapster {
     FROM2 object2,
     FROM3 object3,
     FROM4 object4,
-    To<TO> toCreator,
+    To<TO> to,
   ) {
     final neededFromTypes = [
       FROM1,
@@ -138,7 +138,7 @@ class _MapsterImpl implements Mapster {
 
     final mapper = _findMapper<FourSourcesMapper>(
       neededFromTypes,
-      toCreator,
+      to,
     );
 
     if (mapper == null) {
@@ -174,7 +174,7 @@ class _MapsterImpl implements Mapster {
     FROM3 object3,
     FROM4 object4,
     FROM5 object5,
-    To<TO> toCreator,
+    To<TO> to,
   ) {
     final neededFromTypes = [
       FROM1,
@@ -186,7 +186,7 @@ class _MapsterImpl implements Mapster {
 
     final mapper = _findMapper<FiveSourcesMapper>(
       neededFromTypes,
-      toCreator,
+      to,
     );
 
     if (mapper == null) {
@@ -231,7 +231,7 @@ class _MapsterImpl implements Mapster {
     FROM4 object4,
     FROM5 object5,
     FROM6 object6,
-    To<TO> toCreator,
+    To<TO> to,
   ) {
     final neededFromTypes = [
       FROM1,
@@ -244,7 +244,7 @@ class _MapsterImpl implements Mapster {
 
     final mapper = _findMapper<SixSourcesMapper>(
       neededFromTypes,
-      toCreator,
+      to,
     );
 
     if (mapper == null) {
@@ -293,7 +293,7 @@ class _MapsterImpl implements Mapster {
     FROM5 object5,
     FROM6 object6,
     FROM7 object7,
-    To<TO> toCreator,
+    To<TO> to,
   ) {
     final neededFromTypes = [
       FROM1,
@@ -307,7 +307,7 @@ class _MapsterImpl implements Mapster {
 
     final mapper = _findMapper<SevenSourcesMapper>(
       neededFromTypes,
-      toCreator,
+      to,
     );
 
     if (mapper == null) {
@@ -361,7 +361,7 @@ class _MapsterImpl implements Mapster {
     FROM6 object6,
     FROM7 object7,
     FROM8 object8,
-    To<TO> toCreator,
+    To<TO> to,
   ) {
     final neededFromTypes = [
       FROM1,
@@ -376,7 +376,7 @@ class _MapsterImpl implements Mapster {
 
     final mapper = _findMapper<EightSourcesMapper>(
       neededFromTypes,
-      toCreator,
+      to,
     );
 
     if (mapper == null) {
@@ -434,7 +434,7 @@ class _MapsterImpl implements Mapster {
     FROM7 object7,
     FROM8 object8,
     FROM9 object9,
-    To<TO> toCreator,
+    To<TO> to,
   ) {
     final neededFromTypes = [
       FROM1,
@@ -450,7 +450,7 @@ class _MapsterImpl implements Mapster {
 
     final mapper = _findMapper<NineSourcesMapper>(
       neededFromTypes,
-      toCreator,
+      to,
     );
 
     if (mapper == null) {
@@ -489,15 +489,14 @@ class _MapsterImpl implements Mapster {
     ) as TO;
   }
 
-  String _getMapperUid(To toCreator, List<Type> fromTypes) =>
-      '${toCreator.hashCode} '
+  String _getMapperUid(To to, List<Type> fromTypes) => '${to.hashCode} '
       '${fromTypes.fold<int>(0, (r, e) => r ^ e.hashCode)}';
 
   M? _findMapper<M extends Mapper>(
     List<Type> neededFromTypes,
-    To toCreator,
+    To to,
   ) {
-    final mapper = _mappers[_getMapperUid(toCreator, neededFromTypes)];
+    final mapper = _mappers[_getMapperUid(to, neededFromTypes)];
 
     if (mapper is M) {
       return mapper;

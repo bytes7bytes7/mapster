@@ -27,14 +27,14 @@ abstract class Mapster {
   /// Map 1 object of type [FROM] to another object of type [TO].
   TO map<FROM extends Object, TO extends Object>(
     FROM object,
-    To<TO> _,
+    To<TO> to,
   );
 
   /// Map 2 objects of types [FROM1], [FROM2] to another object of type [TO].
   TO map2<FROM1 extends Object, FROM2 extends Object, TO extends Object>(
     FROM1 object1,
     FROM2 object2,
-    To<TO> _,
+    To<TO> to,
   );
 
   /// Map 3 objects of types [FROM1], [FROM2], [FROM3]
@@ -44,7 +44,7 @@ abstract class Mapster {
     FROM1 object1,
     FROM2 object2,
     FROM3 object3,
-    To<TO> _,
+    To<TO> to,
   );
 
   /// Map 4 objects of types [FROM1], [FROM2], [FROM3], [FROM4]
@@ -55,7 +55,7 @@ abstract class Mapster {
     FROM2 object2,
     FROM3 object3,
     FROM4 object4,
-    To<TO> _,
+    To<TO> to,
   );
 
   /// Map 5 objects of types [FROM1], [FROM2], [FROM3], [FROM4], [FROM5]
@@ -67,7 +67,7 @@ abstract class Mapster {
     FROM3 object3,
     FROM4 object4,
     FROM5 object5,
-    To<TO> _,
+    To<TO> to,
   );
 
   /// Map 6 objects of types [FROM1], [FROM2], [FROM3], [FROM4], [FROM5],
@@ -86,7 +86,7 @@ abstract class Mapster {
     FROM4 object4,
     FROM5 object5,
     FROM6 object6,
-    To<TO> _,
+    To<TO> to,
   );
 
   /// Map 7 objects of types [FROM1], [FROM2], [FROM3], [FROM4], [FROM5],
@@ -107,7 +107,7 @@ abstract class Mapster {
     FROM5 object5,
     FROM6 object6,
     FROM7 object7,
-    To<TO> _,
+    To<TO> to,
   );
 
   /// Map 8 objects of types [FROM1], [FROM2], [FROM3], [FROM4], [FROM5],
@@ -130,7 +130,7 @@ abstract class Mapster {
     FROM6 object6,
     FROM7 object7,
     FROM8 object8,
-    To<TO> _,
+    To<TO> to,
   );
 
   /// Map 9 objects of types [FROM1], [FROM2], [FROM3], [FROM4], [FROM5],
@@ -155,6 +155,6 @@ abstract class Mapster {
     FROM7 object7,
     FROM8 object8,
     FROM9 object9,
-    To<TO> _,
+    To<TO> to,
   );
 }
