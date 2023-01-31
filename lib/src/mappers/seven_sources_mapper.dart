@@ -9,7 +9,7 @@ abstract class SevenSourcesMapper<
     FROM5 extends Object,
     FROM6 extends Object,
     FROM7 extends Object,
-    TO extends Object> implements Mapper {
+    TO extends Object> implements Mapper<TO> {
   const SevenSourcesMapper();
 
   TO map(
@@ -21,9 +21,6 @@ abstract class SevenSourcesMapper<
     FROM6 object6,
     FROM7 object7,
   );
-
-  @override
-  Type get toType => TO;
 
   @override
   List<Type> get fromTypes => [

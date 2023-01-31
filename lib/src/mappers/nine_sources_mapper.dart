@@ -11,7 +11,7 @@ abstract class NineSourcesMapper<
     FROM7 extends Object,
     FROM8 extends Object,
     FROM9 extends Object,
-    TO extends Object> implements Mapper {
+    TO extends Object> implements Mapper<TO> {
   const NineSourcesMapper();
 
   TO map(
@@ -25,9 +25,6 @@ abstract class NineSourcesMapper<
     FROM8 object8,
     FROM9 object9,
   );
-
-  @override
-  Type get toType => TO;
 
   @override
   List<Type> get fromTypes => [

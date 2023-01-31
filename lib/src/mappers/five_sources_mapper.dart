@@ -7,7 +7,7 @@ abstract class FiveSourcesMapper<
     FROM3 extends Object,
     FROM4 extends Object,
     FROM5 extends Object,
-    TO extends Object> implements Mapper {
+    TO extends Object> implements Mapper<TO> {
   const FiveSourcesMapper();
 
   TO map(
@@ -17,9 +17,6 @@ abstract class FiveSourcesMapper<
     FROM4 object4,
     FROM5 object5,
   );
-
-  @override
-  Type get toType => TO;
 
   @override
   List<Type> get fromTypes => [

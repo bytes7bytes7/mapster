@@ -8,7 +8,7 @@ abstract class SixSourcesMapper<
     FROM4 extends Object,
     FROM5 extends Object,
     FROM6 extends Object,
-    TO extends Object> implements Mapper {
+    TO extends Object> implements Mapper<TO> {
   const SixSourcesMapper();
 
   TO map(
@@ -19,9 +19,6 @@ abstract class SixSourcesMapper<
     FROM5 object5,
     FROM6 object6,
   );
-
-  @override
-  Type get toType => TO;
 
   @override
   List<Type> get fromTypes => [

@@ -25,9 +25,11 @@ void oneSourceExample(Mapster mapster) {
     lastName: 'Potter',
   );
 
-  final userResponse = mapster.map(user, to<UserResponse>);
+  final userResponse = mapster.map(user, To<UserResponse>());
 
   print(userResponse);
+
+  print(mapster.map(user, To<UserResponse>()));
 }
 
 class UserPostToPostResponse
@@ -60,8 +62,8 @@ void twoSourcesExample(Mapster mapster) {
   );
 
   // You can swap source objects, the result will be the same
-  final postResponse1 = mapster.map2(user, post, to<PostResponse>);
-  final postResponse2 = mapster.map2(post, user, to<PostResponse>);
+  final postResponse1 = mapster.map2(user, post, To<PostResponse>());
+  final postResponse2 = mapster.map2(post, user, To<PostResponse>());
 
   print(postResponse1);
   print(postResponse2);
@@ -113,13 +115,13 @@ void threeSourcesExample(Mapster mapster) {
     user,
     likeUser,
     post,
-    to<LikedPostNotification>,
+    To<LikedPostNotification>(),
   );
   final notification2 = mapster.map3(
     likeUser,
     user,
     post,
-    to<LikedPostNotification>,
+    To<LikedPostNotification>(),
   );
 
   print(notification1);
@@ -148,7 +150,7 @@ void redefineOneSourceExample(Mapster mapster) {
 
   mapster.register(const UserToUserResponseMapper());
 
-  final userResponse1 = mapster.map(user, to<UserResponse>);
+  final userResponse1 = mapster.map(user, To<UserResponse>());
 
   // You can redefine mappers
   // Mapster stores Mappers based on its source types and result type.
@@ -156,7 +158,7 @@ void redefineOneSourceExample(Mapster mapster) {
   // the old Mapper, then Mapster replaces old one with a new one.
   mapster.register(const AnotherUserToUserResponseMapper());
 
-  final userResponse2 = mapster.map(user, to<UserResponse>);
+  final userResponse2 = mapster.map(user, To<UserResponse>());
 
   print(userResponse1);
   print(userResponse2);

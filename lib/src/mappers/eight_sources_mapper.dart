@@ -10,7 +10,7 @@ abstract class EightSourcesMapper<
     FROM6 extends Object,
     FROM7 extends Object,
     FROM8 extends Object,
-    TO extends Object> implements Mapper {
+    TO extends Object> implements Mapper<TO> {
   const EightSourcesMapper();
 
   TO map(
@@ -23,9 +23,6 @@ abstract class EightSourcesMapper<
     FROM7 object7,
     FROM8 object8,
   );
-
-  @override
-  Type get toType => TO;
 
   @override
   List<Type> get fromTypes => [
