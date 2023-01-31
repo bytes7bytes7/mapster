@@ -356,4 +356,21 @@ void main() {
       );
     },
   );
+
+  test(
+    'Map functions of Mapster work well without assignment to a variable',
+    () {
+      when(() => aToBMapper.map(any())).thenReturn(stubB);
+      when(() => aToBMapper.fromTypes).thenReturn([A]);
+      when(() => aToBMapper.to).thenReturn(To<B>());
+
+      const a = A(1);
+      mapster.register(aToBMapper);
+
+      expect(
+        mapster.map(a, To<B>()),
+        stubB,
+      );
+    },
+  );
 }
