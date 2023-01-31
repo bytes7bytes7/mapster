@@ -68,17 +68,17 @@ void main() {
     lastName: 'Potter',
   );
 
-  final userResponse = mapster.map(user, to<UserResponse>);
+  final userResponse = mapster.map(user, To<UserResponse>());
 }
 ```
 
-Note that you should pass `to<YourResultType>` as last parameter. This way you specify what type
+Note that you should pass `To<YourResultType>()` as last parameter. This way you specify what type
 should `Mapster` return.
 
 ## Map functions
 
 `Mapster` has 9 `map` methods: `map`, `map2`, ... , `map9`. All of them get source objects and
-then `to<YourResultType>`.
+then `To<YourResultType>()`.
 
 You can pass source objects to `Mapster`'s `map` methods in any order. You do not need to check the
 order of input objects in signature of certain `Mapper` every time. `Mapster` is smart enough to
@@ -116,8 +116,8 @@ void main() {
   );
 
   // You can swap source objects, the result will be the same.
-  final postResponse1 = mapster.map2(user, post, to<PostResponse>);
-  final postResponse2 = mapster.map2(post, user, to<PostResponse>);
+  final postResponse1 = mapster.map2(user, post, To<PostResponse>());
+  final postResponse2 = mapster.map2(post, user, To<PostResponse>());
 }
 ```
 
@@ -173,13 +173,13 @@ void main() {
     user,
     likeUser,
     post,
-    to<LikedPostNotification>,
+    To<LikedPostNotification>(),
   );
   final notification2 = mapster.map3(
     likeUser,
     user,
     post,
-    to<LikedPostNotification>,
+    To<LikedPostNotification>(),
   );
 }
 ```
@@ -189,8 +189,8 @@ void main() {
 ### Pros
 
 - Do not need to specify types in `<>` during using `register`, `registerAll`, and `map` functions
-  of `Mapster`.
-- `Mapster` package has no dependency
+  of `Mapster`
+- `Mapster` package has depends only on `meta` package
 - `Mapster` has O(1) time complexity of searching for a proper `Mapper`
 - Do not need to inject your classes/functions with large amount of mappers anymore. Just inject
   with `Mapster`
@@ -236,13 +236,13 @@ void main(Mapster mapster) {
   // Register Mapper with input type: User, and output type: UserResponse.
   mapster.register(const UserToUserResponseMapper());
 
-  final userResponse1 = mapster.map(user, to<UserResponse>);
+  final userResponse1 = mapster.map(user, To<UserResponse>());
 
   // Register another Mapper with the same types: 
   // input type: User, and output type: UserResponse.
   mapster.register(const AnotherUserToUserResponseMapper());
 
-  final userResponse2 = mapster.map(user, to<UserResponse>);
+  final userResponse2 = mapster.map(user, To<UserResponse>());
 }
 ```
 
@@ -261,7 +261,7 @@ void main(Mapster mapster) {
   // Register Mapper with input type: User, and output type: UserResponse.
   mapster.register(const UserToUserResponseMapper());
 
-  final userResponse1 = mapster.map(user, to<UserResponse>);
+  final userResponse1 = mapster.map(user, To<UserResponse>());
 
   // Register another Mapper with swapped result and input types: 
   // input type: UserResponse, and output type: User.
@@ -273,7 +273,7 @@ void main(Mapster mapster) {
   // Also we can say: because output type of the 1st Mapper not
   // equals to output type of the 2nd Mapper, these two
   // mappers considered as different.
-  final user2 = mapster.map(userResponse1, to<User>);
+  final user2 = mapster.map(userResponse1, To<User>());
 }
 ```
 

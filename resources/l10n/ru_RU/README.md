@@ -68,17 +68,17 @@ void main() {
     lastName: 'Potter',
   );
 
-  final userResponse = mapster.map(user, to<UserResponse>);
+  final userResponse = mapster.map(user, To<UserResponse>());
 }
 ```
 
-Обратите внимание на то, что вам необходимо последним аргументом передавать `to<YourResultType>`.
+Обратите внимание на то, что вам необходимо последним аргументом передавать `To<YourResultType>()`.
 Таким образом вы указываете, в какой тип `Mapster` должен преобразовать объект.
 
 ## Map функции
 
 `Mapster` имеет 9 `map` методов: `map`, `map2`, ... , `map9`. Каждый метод принимает входные данные
-и затем `to<YourResultType>`.
+и затем `To<YourResultType>()`.
 
 Вы можете передавать объекты-источники в `map` метод `Mapster`'а в любом порядке. Вам не нужно
 каждый раз проверять порядок входных данных в сигнатуре какого-то конкретного `Mapper`'а. `Mapster`
@@ -116,8 +116,8 @@ void main() {
   );
 
   // Вы можете менять местами объекты-источники, результат будет одинаковым.
-  final postResponse1 = mapster.map2(user, post, to<PostResponse>);
-  final postResponse2 = mapster.map2(post, user, to<PostResponse>);
+  final postResponse1 = mapster.map2(user, post, To<PostResponse>());
+  final postResponse2 = mapster.map2(post, user, To<PostResponse>());
 }
 ```
 
@@ -174,13 +174,13 @@ void main() {
     user,
     likeUser,
     post,
-    to<LikedPostNotification>,
+    To<LikedPostNotification>(),
   );
   final notification2 = mapster.map3(
     likeUser,
     user,
     post,
-    to<LikedPostNotification>,
+    To<LikedPostNotification>(),
   );
 }
 ```
@@ -190,8 +190,8 @@ void main() {
 ### Плюсы
 
 - Вам не нужно указывать типы в `<>` при использовании `register`, `registerAll` и `map`
-  функций `Mapster`'а.
-- `Mapster` не имеет зависимостей
+  функций `Mapster`'а
+- `Mapster` зависит только от пакета `meta`
 - `Mapster` имеет временную сложность О(1) поиска подходящего `Mapper`'а
 - Вам больше не потребуется передавать огромное количество мапперов в ваши классы/функции. Добавьте
   только `Mapster`
@@ -239,13 +239,13 @@ void main(Mapster mapster) {
   // Регистрация Mapper'а с входным типом: User и выходным типом: UserResponse
   mapster.register(const UserToUserResponseMapper());
 
-  final userResponse1 = mapster.map(user, to<UserResponse>);
+  final userResponse1 = mapster.map(user, To<UserResponse>());
 
   // Регистрация другого Mapper'а с теми же типами: 
   // входной тип: User, выходной тип: UserResponse
   mapster.register(const AnotherUserToUserResponseMapper());
 
-  final userResponse2 = mapster.map(user, to<UserResponse>);
+  final userResponse2 = mapster.map(user, To<UserResponse>());
 }
 ```
 
@@ -264,7 +264,7 @@ void main(Mapster mapster) {
   // Регистрация Mapper'а с входным типом: User и выходным типом: UserResponse
   mapster.register(const UserToUserResponseMapper());
 
-  final userResponse1 = mapster.map(user, to<UserResponse>);
+  final userResponse1 = mapster.map(user, To<UserResponse>());
 
   // Регистрация другого Mapper'а с поменяными входным и выходным типами: 
   // входной тип: UserResponse, выходной тип: User
@@ -276,7 +276,7 @@ void main(Mapster mapster) {
   // Также можно сказать: т. к. выходной тип 1-го Mapper'а не равен
   // выходному типу 2-го Mapper'а, эти два
   // Mapper'а считаются разными.
-  final user2 = mapster.map(userResponse1, to<User>);
+  final user2 = mapster.map(userResponse1, To<User>());
 }
 ```
 
