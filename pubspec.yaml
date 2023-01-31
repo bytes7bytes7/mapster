@@ -7,9 +7,6 @@ repository: https://github.com/bytes7bytes7/mapster
 environment:
   sdk: '>=2.17.0 <3.0.0'
 
-dependencies:
-  meta: ^1.9.0
-
 dev_dependencies:
   lints: ^2.0.0
   mocktail: ^0.3.0

@@ -3,9 +3,12 @@ import 'mapper.dart';
 /// [Mapper] with 2 source objects.
 abstract class TwoSourcesMapper<FROM1 extends Object, FROM2 extends Object,
     TO extends Object> extends Mapper<TO> {
-  const TwoSourcesMapper();
+  TwoSourcesMapper(super.input)
+      : source1 = getSource(input: input, type: FROM1, order: 1),
+        source2 = getSource(input: input, type: FROM2, order: 2);
 
-  TO map(FROM1 object1, FROM2 object2);
+  final FROM1 source1;
+  final FROM2 source2;
 
   @override
   List<Type> get fromTypes => [

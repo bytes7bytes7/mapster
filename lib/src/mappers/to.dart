@@ -1,7 +1,6 @@
-import 'package:meta/meta.dart';
+// ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
 
 /// Helps to specify output type.
-@immutable
 class To<T extends Object> {
   final Type to = T;
 

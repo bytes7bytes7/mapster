@@ -9,18 +9,23 @@ abstract class SevenSourcesMapper<
     FROM5 extends Object,
     FROM6 extends Object,
     FROM7 extends Object,
-    TO extends Object> implements Mapper<TO> {
-  const SevenSourcesMapper();
+    TO extends Object> extends Mapper<TO> {
+  SevenSourcesMapper(super.input)
+      : source1 = getSource(input: input, type: FROM1, order: 1),
+        source2 = getSource(input: input, type: FROM2, order: 2),
+        source3 = getSource(input: input, type: FROM3, order: 3),
+        source4 = getSource(input: input, type: FROM4, order: 4),
+        source5 = getSource(input: input, type: FROM5, order: 5),
+        source6 = getSource(input: input, type: FROM6, order: 6),
+        source7 = getSource(input: input, type: FROM7, order: 7);
 
-  TO map(
-    FROM1 object1,
-    FROM2 object2,
-    FROM3 object3,
-    FROM4 object4,
-    FROM5 object5,
-    FROM6 object6,
-    FROM7 object7,
-  );
+  final FROM1 source1;
+  final FROM2 source2;
+  final FROM3 source3;
+  final FROM4 source4;
+  final FROM5 source5;
+  final FROM6 source6;
+  final FROM7 source7;
 
   @override
   List<Type> get fromTypes => [

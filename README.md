@@ -190,7 +190,7 @@ void main() {
 
 - Do not need to specify types in `<>` during using `register`, `registerAll`, and `map` functions
   of `Mapster`
-- `Mapster` package has depends only on `meta` package
+- `Mapster` package depends only on `meta` package
 - `Mapster` has O(1) time complexity of searching for a proper `Mapper`
 - Do not need to inject your classes/functions with large amount of mappers anymore. Just inject
   with `Mapster`
