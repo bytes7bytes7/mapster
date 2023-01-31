@@ -8,5 +8,5 @@ abstract class Mapper<TO extends Object> {
   List<Type> get fromTypes;
 
   /// Helps to define output type.
-  To<TO> get toCreator => To<TO>();
+  To<TO> get to => To<TO>();
 }

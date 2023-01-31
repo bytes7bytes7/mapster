@@ -5,7 +5,7 @@ class _MapsterImpl implements Mapster {
 
   @override
   void register(Mapper mapper) {
-    _mappers[_getMapperUid(mapper.toCreator, mapper.fromTypes)] = mapper;
+    _mappers[_getMapperUid(mapper.to, mapper.fromTypes)] = mapper;
   }
 
   @override

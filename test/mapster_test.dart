@@ -86,7 +86,7 @@ void main() {
       const a = A(1);
 
       expect(
-        () => mapster.map(a, to<B>),
+        () => mapster.map(a, To<B>()),
         throwsA(TypeMatcher<MapperNotRegistered<OneSourceMapper<A, B>>>()),
       );
     },
@@ -97,13 +97,13 @@ void main() {
     () {
       when(() => aToBMapper.map(any())).thenReturn(stubB);
       when(() => aToBMapper.fromTypes).thenReturn([A]);
-      when(() => aToBMapper.toType).thenReturn(B);
+      when(() => aToBMapper.to).thenReturn(To<B>());
 
       const a = A(1);
       mapster.register(aToBMapper);
 
       expect(
-        () => mapster.map(a, to<B>),
+        () => mapster.map(a, To<B>()),
         returnsNormally,
       );
     },
@@ -114,13 +114,13 @@ void main() {
     'but the proper one is not.',
     () {
       when(() => aAndCToDMapper.fromTypes).thenReturn([A, C]);
-      when(() => aAndCToDMapper.toType).thenReturn(D);
+      when(() => aAndCToDMapper.to).thenReturn(To<D>());
 
       const a = A(1);
       mapster.register(aAndCToDMapper);
 
       expect(
-        () => mapster.map(a, to<B>),
+        () => mapster.map(a, To<B>()),
         throwsA(TypeMatcher<MapperNotRegistered<OneSourceMapper<A, B>>>()),
       );
     },
@@ -132,9 +132,9 @@ void main() {
     () {
       when(() => aToBMapper.map(any())).thenReturn(stubB);
       when(() => aToBMapper.fromTypes).thenReturn([A]);
-      when(() => aToBMapper.toType).thenReturn(B);
+      when(() => aToBMapper.to).thenReturn(To<B>());
       when(() => aAndCToDMapper.fromTypes).thenReturn([A, C]);
-      when(() => aAndCToDMapper.toType).thenReturn(D);
+      when(() => aAndCToDMapper.to).thenReturn(To<D>());
 
       const a = A(1);
       mapster.registerAll(
@@ -145,7 +145,7 @@ void main() {
       );
 
       expect(
-        () => mapster.map(a, to<B>),
+        () => mapster.map(a, To<B>()),
         returnsNormally,
       );
     },
@@ -156,12 +156,12 @@ void main() {
     () {
       when(() => aToBMapper.map(any())).thenReturn(stubB);
       when(() => aToBMapper.fromTypes).thenReturn([A]);
-      when(() => aToBMapper.toType).thenReturn(B);
+      when(() => aToBMapper.to).thenReturn(To<B>());
 
       const a = A(1);
       mapster.register(aToBMapper);
 
-      final result = mapster.map(a, to<B>);
+      final result = mapster.map(a, To<B>());
 
       expect(
         result,
@@ -175,9 +175,9 @@ void main() {
     () {
       when(() => aToBMapper.map(any())).thenReturn(stubB);
       when(() => aToBMapper.fromTypes).thenReturn([A]);
-      when(() => aToBMapper.toType).thenReturn(B);
+      when(() => aToBMapper.to).thenReturn(To<B>());
       when(() => aAndCToDMapper.fromTypes).thenReturn([A, C]);
-      when(() => aAndCToDMapper.toType).thenReturn(D);
+      when(() => aAndCToDMapper.to).thenReturn(To<D>());
 
       const a = A(1);
       mapster.registerAll(
@@ -187,7 +187,7 @@ void main() {
         ],
       );
 
-      final result = mapster.map(a, to<B>);
+      final result = mapster.map(a, To<B>());
 
       expect(
         result,
@@ -201,9 +201,9 @@ void main() {
     () {
       when(() => aToBMapper.map(any())).thenReturn(stubB);
       when(() => aToBMapper.fromTypes).thenReturn([A]);
-      when(() => aToBMapper.toType).thenReturn(B);
+      when(() => aToBMapper.to).thenReturn(To<B>());
       when(() => aAndCToDMapper.fromTypes).thenReturn([A, C]);
-      when(() => aAndCToDMapper.toType).thenReturn(D);
+      when(() => aAndCToDMapper.to).thenReturn(To<D>());
 
       const a = A(1);
       mapster.registerAll(
@@ -213,7 +213,7 @@ void main() {
         ],
       );
 
-      final result = mapster.map(a, to<B>);
+      final result = mapster.map(a, To<B>());
 
       expect(
         result,
@@ -230,9 +230,9 @@ void main() {
     () {
       when(() => aToBMapper.map(any())).thenReturn(stubB);
       when(() => aToBMapper.fromTypes).thenReturn([A]);
-      when(() => aToBMapper.toType).thenReturn(B);
+      when(() => aToBMapper.to).thenReturn(To<B>());
       when(() => bToAMapper.fromTypes).thenReturn([B]);
-      when(() => bToAMapper.toType).thenReturn(A);
+      when(() => bToAMapper.to).thenReturn(To<A>());
 
       const a = A(1);
       mapster.registerAll(
@@ -243,7 +243,7 @@ void main() {
       );
 
       expect(
-        () => mapster.map(a, to<B>),
+        () => mapster.map(a, To<B>()),
         returnsNormally,
       );
     },
@@ -255,9 +255,9 @@ void main() {
     () {
       when(() => aToBMapper.map(any())).thenReturn(stubB);
       when(() => aToBMapper.fromTypes).thenReturn([A]);
-      when(() => aToBMapper.toType).thenReturn(B);
+      when(() => aToBMapper.to).thenReturn(To<B>());
       when(() => aToEMapper.fromTypes).thenReturn([A]);
-      when(() => aToEMapper.toType).thenReturn(E);
+      when(() => aToEMapper.to).thenReturn(To<E>());
 
       const a = A(1);
       mapster.registerAll(
@@ -268,7 +268,7 @@ void main() {
       );
 
       expect(
-        () => mapster.map(a, to<B>),
+        () => mapster.map(a, To<B>()),
         returnsNormally,
       );
     },
@@ -280,9 +280,9 @@ void main() {
     () {
       when(() => aToBMapper.map(any())).thenReturn(stubB);
       when(() => aToBMapper.fromTypes).thenReturn([A]);
-      when(() => aToBMapper.toType).thenReturn(B);
+      when(() => aToBMapper.to).thenReturn(To<B>());
       when(() => eToBMapper.fromTypes).thenReturn([B]);
-      when(() => eToBMapper.toType).thenReturn(E);
+      when(() => eToBMapper.to).thenReturn(To<B>());
 
       const a = A(1);
       mapster.registerAll(
@@ -293,7 +293,7 @@ void main() {
       );
 
       expect(
-        () => mapster.map(a, to<B>),
+        () => mapster.map(a, To<B>()),
         returnsNormally,
       );
     },
@@ -304,10 +304,10 @@ void main() {
     'the same output type as interchangeable mappers.',
     () {
       when(() => aToBMapper.fromTypes).thenReturn([A]);
-      when(() => aToBMapper.toType).thenReturn(B);
+      when(() => aToBMapper.to).thenReturn(To<B>());
       when(() => aToBMapper.map(any())).thenReturn(stubB);
       when(() => anotherAToBMapper.fromTypes).thenReturn([A]);
-      when(() => anotherAToBMapper.toType).thenReturn(B);
+      when(() => anotherAToBMapper.to).thenReturn(To<B>());
       when(() => anotherAToBMapper.map(any())).thenReturn(anotherStubB);
 
       const a = A(1);
@@ -318,7 +318,7 @@ void main() {
         ],
       );
 
-      final result = mapster.map(a, to<B>);
+      final result = mapster.map(a, To<B>());
 
       expect(
         result,
@@ -333,10 +333,10 @@ void main() {
     'the same output type as interchangeable mappers.',
     () {
       when(() => aAndCToDMapper.fromTypes).thenReturn([A, C]);
-      when(() => aAndCToDMapper.toType).thenReturn(D);
+      when(() => aAndCToDMapper.to).thenReturn(To<D>());
       when(() => aAndCToDMapper.map(any(), any())).thenReturn(stubD);
       when(() => cAndAToDMapper.fromTypes).thenReturn([C, A]);
-      when(() => cAndAToDMapper.toType).thenReturn(D);
+      when(() => cAndAToDMapper.to).thenReturn(To<D>());
       when(() => cAndAToDMapper.map(any(), any())).thenReturn(anotherStubD);
 
       const a = A(1);
@@ -348,7 +348,7 @@ void main() {
         ],
       );
 
-      final result = mapster.map2(a, c, to<D>);
+      final result = mapster.map2(a, c, To<D>());
 
       expect(
         result,
