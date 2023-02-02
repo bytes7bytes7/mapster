@@ -1,52 +1,58 @@
 part of 'mapster.dart';
 
 class _MapsterImpl implements Mapster {
-  final _mappers = HashMap<String, Mapper>();
+  final _mapperCreators = HashMap<String, MapperCreator>();
 
   @override
-  void register(Mapper mapper) {
-    _mappers[_getMapperUid(mapper.to, mapper.fromTypes)] = mapper;
+  void register(MapperCreator mapperCreator) {
+    // Create mapper to get `to` and `fromTypes`
+    final mapper = mapperCreator(MapperInput());
+
+    _mapperCreators[_getMapperCreatorID(mapper.to, mapper.fromTypes)] =
+        mapperCreator;
   }
 
   @override
-  void registerAll(List<Mapper> mappers) {
-    for (final mapper in mappers) {
-      register(mapper);
+  void registerAll(List<MapperCreator> mapperCreators) {
+    for (final mapperCreator in mapperCreators) {
+      register(mapperCreator);
     }
   }
 
   @override
   TO map<FROM extends Object, TO extends Object>(
-    FROM object,
+    FROM source,
     To<TO> to,
   ) {
-    final neededFromTypes = [FROM];
+    final neededFromTypes = [
+      FROM,
+    ];
 
-    final mapper = _findMapper<OneSourceMapper>(
+    final mapperCreator = _findMapperCreator<OneSourceMapper>(
       neededFromTypes,
       to,
     );
 
-    if (mapper == null) {
-      throw MapperNotRegistered<OneSourceMapper<FROM, TO>>();
+    if (mapperCreator == null) {
+      throw MapperCreatorNotRegistered<
+          MapperCreator<OneSourceMapper<FROM, TO>>>();
     }
 
-    final args = _sortArgs(
-      mapper,
-      neededFromTypes,
-    );
+    final sources = [
+      source,
+    ];
 
-    final passedObjects = [object];
+    final input = _createInput(neededFromTypes, sources);
 
-    return mapper.map(
-      passedObjects.removeAt(args[0]!),
-    ) as TO;
+    final mapper = mapperCreator(input);
+
+    return mapper.map() as TO;
   }
 
   @override
   TO map2<FROM1 extends Object, FROM2 extends Object, TO extends Object>(
-    FROM1 object1,
-    FROM2 object2,
+    FROM1 source1,
+    FROM2 source2,
     To<TO> to,
   ) {
     final neededFromTypes = [
@@ -54,37 +60,34 @@ class _MapsterImpl implements Mapster {
       FROM2,
     ];
 
-    final mapper = _findMapper<TwoSourcesMapper>(
+    final mapperCreator = _findMapperCreator<TwoSourcesMapper>(
       neededFromTypes,
       to,
     );
 
-    if (mapper == null) {
-      throw MapperNotRegistered<TwoSourcesMapper<FROM1, FROM2, TO>>();
+    if (mapperCreator == null) {
+      throw MapperCreatorNotRegistered<
+          MapperCreator<TwoSourcesMapper<FROM1, FROM2, TO>>>();
     }
 
-    final args = _sortArgs(
-      mapper,
-      neededFromTypes,
-    );
-
-    final passedObjects = [
-      object1,
-      object2,
+    final sources = [
+      source1,
+      source2,
     ];
 
-    return mapper.map(
-      passedObjects.removeAt(args[0]!),
-      passedObjects.removeAt(args[1]!),
-    ) as TO;
+    final input = _createInput(neededFromTypes, sources);
+
+    final mapper = mapperCreator(input);
+
+    return mapper.map() as TO;
   }
 
   @override
   TO map3<FROM1 extends Object, FROM2 extends Object, FROM3 extends Object,
       TO extends Object>(
-    FROM1 object1,
-    FROM2 object2,
-    FROM3 object3,
+    FROM1 source1,
+    FROM2 source2,
+    FROM3 source3,
     To<TO> to,
   ) {
     final neededFromTypes = [
@@ -93,40 +96,36 @@ class _MapsterImpl implements Mapster {
       FROM3,
     ];
 
-    final mapper = _findMapper<ThreeSourcesMapper>(
+    final mapperCreator = _findMapperCreator<ThreeSourcesMapper>(
       neededFromTypes,
       to,
     );
 
-    if (mapper == null) {
-      throw MapperNotRegistered<ThreeSourcesMapper<FROM1, FROM2, FROM3, TO>>();
+    if (mapperCreator == null) {
+      throw MapperCreatorNotRegistered<
+          MapperCreator<ThreeSourcesMapper<FROM1, FROM2, FROM3, TO>>>();
     }
 
-    final args = _sortArgs(
-      mapper,
-      neededFromTypes,
-    );
-
-    final passedObjects = [
-      object1,
-      object2,
-      object3,
+    final sources = [
+      source1,
+      source2,
+      source3,
     ];
 
-    return mapper.map(
-      passedObjects.removeAt(args[0]!),
-      passedObjects.removeAt(args[1]!),
-      passedObjects.removeAt(args[2]!),
-    ) as TO;
+    final input = _createInput(neededFromTypes, sources);
+
+    final mapper = mapperCreator(input);
+
+    return mapper.map() as TO;
   }
 
   @override
   TO map4<FROM1 extends Object, FROM2 extends Object, FROM3 extends Object,
       FROM4 extends Object, TO extends Object>(
-    FROM1 object1,
-    FROM2 object2,
-    FROM3 object3,
-    FROM4 object4,
+    FROM1 source1,
+    FROM2 source2,
+    FROM3 source3,
+    FROM4 source4,
     To<TO> to,
   ) {
     final neededFromTypes = [
@@ -136,44 +135,38 @@ class _MapsterImpl implements Mapster {
       FROM4,
     ];
 
-    final mapper = _findMapper<FourSourcesMapper>(
+    final mapperCreator = _findMapperCreator<FourSourcesMapper>(
       neededFromTypes,
       to,
     );
 
-    if (mapper == null) {
-      throw MapperNotRegistered<
-          FourSourcesMapper<FROM1, FROM2, FROM3, FROM4, TO>>();
+    if (mapperCreator == null) {
+      throw MapperCreatorNotRegistered<
+          MapperCreator<FourSourcesMapper<FROM1, FROM2, FROM3, FROM4, TO>>>();
     }
 
-    final args = _sortArgs(
-      mapper,
-      neededFromTypes,
-    );
-
-    final passedObjects = [
-      object1,
-      object2,
-      object3,
-      object4,
+    final sources = [
+      source1,
+      source2,
+      source3,
+      source4,
     ];
 
-    return mapper.map(
-      passedObjects.removeAt(args[0]!),
-      passedObjects.removeAt(args[1]!),
-      passedObjects.removeAt(args[2]!),
-      passedObjects.removeAt(args[3]!),
-    ) as TO;
+    final input = _createInput(neededFromTypes, sources);
+
+    final mapper = mapperCreator(input);
+
+    return mapper.map() as TO;
   }
 
   @override
   TO map5<FROM1 extends Object, FROM2 extends Object, FROM3 extends Object,
       FROM4 extends Object, FROM5 extends Object, TO extends Object>(
-    FROM1 object1,
-    FROM2 object2,
-    FROM3 object3,
-    FROM4 object4,
-    FROM5 object5,
+    FROM1 source1,
+    FROM2 source2,
+    FROM3 source3,
+    FROM4 source4,
+    FROM5 source5,
     To<TO> to,
   ) {
     final neededFromTypes = [
@@ -184,36 +177,30 @@ class _MapsterImpl implements Mapster {
       FROM5,
     ];
 
-    final mapper = _findMapper<FiveSourcesMapper>(
+    final mapperCreator = _findMapperCreator<FiveSourcesMapper>(
       neededFromTypes,
       to,
     );
 
-    if (mapper == null) {
-      throw MapperNotRegistered<
-          FiveSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, TO>>();
+    if (mapperCreator == null) {
+      throw MapperCreatorNotRegistered<
+          MapperCreator<
+              FiveSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, TO>>>();
     }
 
-    final args = _sortArgs(
-      mapper,
-      neededFromTypes,
-    );
-
-    final passedObjects = [
-      object1,
-      object2,
-      object3,
-      object4,
-      object5,
+    final sources = [
+      source1,
+      source2,
+      source3,
+      source4,
+      source5,
     ];
 
-    return mapper.map(
-      passedObjects.removeAt(args[0]!),
-      passedObjects.removeAt(args[1]!),
-      passedObjects.removeAt(args[2]!),
-      passedObjects.removeAt(args[3]!),
-      passedObjects.removeAt(args[4]!),
-    ) as TO;
+    final input = _createInput(neededFromTypes, sources);
+
+    final mapper = mapperCreator(input);
+
+    return mapper.map() as TO;
   }
 
   @override
@@ -225,12 +212,12 @@ class _MapsterImpl implements Mapster {
       FROM5 extends Object,
       FROM6 extends Object,
       TO extends Object>(
-    FROM1 object1,
-    FROM2 object2,
-    FROM3 object3,
-    FROM4 object4,
-    FROM5 object5,
-    FROM6 object6,
+    FROM1 source1,
+    FROM2 source2,
+    FROM3 source3,
+    FROM4 source4,
+    FROM5 source5,
+    FROM6 source6,
     To<TO> to,
   ) {
     final neededFromTypes = [
@@ -242,38 +229,32 @@ class _MapsterImpl implements Mapster {
       FROM6,
     ];
 
-    final mapper = _findMapper<SixSourcesMapper>(
+    final mapperCreator = _findMapperCreator<SixSourcesMapper>(
       neededFromTypes,
       to,
     );
 
-    if (mapper == null) {
-      throw MapperNotRegistered<
-          SixSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, TO>>();
+    if (mapperCreator == null) {
+      throw MapperCreatorNotRegistered<
+          MapperCreator<
+              SixSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6,
+                  TO>>>();
     }
 
-    final args = _sortArgs(
-      mapper,
-      neededFromTypes,
-    );
-
-    final passedObjects = [
-      object1,
-      object2,
-      object3,
-      object4,
-      object5,
-      object6,
+    final sources = [
+      source1,
+      source2,
+      source3,
+      source4,
+      source5,
+      source6,
     ];
 
-    return mapper.map(
-      passedObjects.removeAt(args[0]!),
-      passedObjects.removeAt(args[1]!),
-      passedObjects.removeAt(args[2]!),
-      passedObjects.removeAt(args[3]!),
-      passedObjects.removeAt(args[4]!),
-      passedObjects.removeAt(args[5]!),
-    ) as TO;
+    final input = _createInput(neededFromTypes, sources);
+
+    final mapper = mapperCreator(input);
+
+    return mapper.map() as TO;
   }
 
   @override
@@ -286,13 +267,13 @@ class _MapsterImpl implements Mapster {
       FROM6 extends Object,
       FROM7 extends Object,
       TO extends Object>(
-    FROM1 object1,
-    FROM2 object2,
-    FROM3 object3,
-    FROM4 object4,
-    FROM5 object5,
-    FROM6 object6,
-    FROM7 object7,
+    FROM1 source1,
+    FROM2 source2,
+    FROM3 source3,
+    FROM4 source4,
+    FROM5 source5,
+    FROM6 source6,
+    FROM7 source7,
     To<TO> to,
   ) {
     final neededFromTypes = [
@@ -305,41 +286,33 @@ class _MapsterImpl implements Mapster {
       FROM7,
     ];
 
-    final mapper = _findMapper<SevenSourcesMapper>(
+    final mapperCreator = _findMapperCreator<SevenSourcesMapper>(
       neededFromTypes,
       to,
     );
 
-    if (mapper == null) {
-      throw MapperNotRegistered<
-          SevenSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7,
-              TO>>();
+    if (mapperCreator == null) {
+      throw MapperCreatorNotRegistered<
+          MapperCreator<
+              SevenSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6,
+                  FROM7, TO>>>();
     }
 
-    final args = _sortArgs(
-      mapper,
-      neededFromTypes,
-    );
-
-    final passedObjects = [
-      object1,
-      object2,
-      object3,
-      object4,
-      object5,
-      object6,
-      object7,
+    final sources = [
+      source1,
+      source2,
+      source3,
+      source4,
+      source5,
+      source6,
+      source7,
     ];
 
-    return mapper.map(
-      passedObjects.removeAt(args[0]!),
-      passedObjects.removeAt(args[1]!),
-      passedObjects.removeAt(args[2]!),
-      passedObjects.removeAt(args[3]!),
-      passedObjects.removeAt(args[4]!),
-      passedObjects.removeAt(args[5]!),
-      passedObjects.removeAt(args[6]!),
-    ) as TO;
+    final input = _createInput(neededFromTypes, sources);
+
+    final mapper = mapperCreator(input);
+
+    return mapper.map() as TO;
   }
 
   @override
@@ -353,14 +326,14 @@ class _MapsterImpl implements Mapster {
       FROM7 extends Object,
       FROM8 extends Object,
       TO extends Object>(
-    FROM1 object1,
-    FROM2 object2,
-    FROM3 object3,
-    FROM4 object4,
-    FROM5 object5,
-    FROM6 object6,
-    FROM7 object7,
-    FROM8 object8,
+    FROM1 source1,
+    FROM2 source2,
+    FROM3 source3,
+    FROM4 source4,
+    FROM5 source5,
+    FROM6 source6,
+    FROM7 source7,
+    FROM8 source8,
     To<TO> to,
   ) {
     final neededFromTypes = [
@@ -374,43 +347,34 @@ class _MapsterImpl implements Mapster {
       FROM8,
     ];
 
-    final mapper = _findMapper<EightSourcesMapper>(
+    final mapperCreator = _findMapperCreator<EightSourcesMapper>(
       neededFromTypes,
       to,
     );
 
-    if (mapper == null) {
-      throw MapperNotRegistered<
-          EightSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7,
-              FROM8, TO>>();
+    if (mapperCreator == null) {
+      throw MapperCreatorNotRegistered<
+          MapperCreator<
+              EightSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6,
+                  FROM7, FROM8, TO>>>();
     }
 
-    final args = _sortArgs(
-      mapper,
-      neededFromTypes,
-    );
-
-    final passedObjects = [
-      object1,
-      object2,
-      object3,
-      object4,
-      object5,
-      object6,
-      object7,
-      object8,
+    final sources = [
+      source1,
+      source2,
+      source3,
+      source4,
+      source5,
+      source6,
+      source7,
+      source8,
     ];
 
-    return mapper.map(
-      passedObjects.removeAt(args[0]!),
-      passedObjects.removeAt(args[1]!),
-      passedObjects.removeAt(args[2]!),
-      passedObjects.removeAt(args[3]!),
-      passedObjects.removeAt(args[4]!),
-      passedObjects.removeAt(args[5]!),
-      passedObjects.removeAt(args[6]!),
-      passedObjects.removeAt(args[7]!),
-    ) as TO;
+    final input = _createInput(neededFromTypes, sources);
+
+    final mapper = mapperCreator(input);
+
+    return mapper.map() as TO;
   }
 
   @override
@@ -425,15 +389,15 @@ class _MapsterImpl implements Mapster {
       FROM8 extends Object,
       FROM9 extends Object,
       TO extends Object>(
-    FROM1 object1,
-    FROM2 object2,
-    FROM3 object3,
-    FROM4 object4,
-    FROM5 object5,
-    FROM6 object6,
-    FROM7 object7,
-    FROM8 object8,
-    FROM9 object9,
+    FROM1 source1,
+    FROM2 source2,
+    FROM3 source3,
+    FROM4 source4,
+    FROM5 source5,
+    FROM6 source6,
+    FROM7 source7,
+    FROM8 source8,
+    FROM9 source9,
     To<TO> to,
   ) {
     final neededFromTypes = [
@@ -448,79 +412,77 @@ class _MapsterImpl implements Mapster {
       FROM9,
     ];
 
-    final mapper = _findMapper<NineSourcesMapper>(
+    final mapperCreator = _findMapperCreator<NineSourcesMapper>(
       neededFromTypes,
       to,
     );
 
-    if (mapper == null) {
-      throw MapperNotRegistered<
-          NineSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7,
-              FROM8, FROM9, TO>>();
+    if (mapperCreator == null) {
+      throw MapperCreatorNotRegistered<
+          MapperCreator<
+              NineSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7,
+                  FROM8, FROM9, TO>>>();
     }
 
-    final args = _sortArgs(
-      mapper,
-      neededFromTypes,
-    );
-
-    final passedObjects = [
-      object1,
-      object2,
-      object3,
-      object4,
-      object5,
-      object6,
-      object7,
-      object8,
-      object9,
+    final sources = [
+      source1,
+      source2,
+      source3,
+      source4,
+      source5,
+      source6,
+      source7,
+      source8,
+      source9,
     ];
 
-    return mapper.map(
-      passedObjects.removeAt(args[0]!),
-      passedObjects.removeAt(args[1]!),
-      passedObjects.removeAt(args[2]!),
-      passedObjects.removeAt(args[3]!),
-      passedObjects.removeAt(args[4]!),
-      passedObjects.removeAt(args[5]!),
-      passedObjects.removeAt(args[6]!),
-      passedObjects.removeAt(args[7]!),
-      passedObjects.removeAt(args[8]!),
-    ) as TO;
+    final input = _createInput(neededFromTypes, sources);
+
+    final mapper = mapperCreator(input);
+
+    return mapper.map() as TO;
   }
 
-  String _getMapperUid(To to, List<Type> fromTypes) => '${to.hashCode} '
+  String _getMapperCreatorID(To to, List<Type> fromTypes) => '${to.hashCode} '
       '${fromTypes.fold<int>(0, (r, e) => r ^ e.hashCode)}';
 
-  M? _findMapper<M extends Mapper>(
+  MapperCreator<M>? _findMapperCreator<M extends Mapper>(
     List<Type> neededFromTypes,
     To to,
   ) {
-    final mapper = _mappers[_getMapperUid(to, neededFromTypes)];
+    final mapperCreator =
+        _mapperCreators[_getMapperCreatorID(to, neededFromTypes)];
 
-    if (mapper is M) {
-      return mapper;
+    if (mapperCreator is MapperCreator<M>) {
+      return mapperCreator;
     }
 
     return null;
   }
 
-  HashMap<int, int> _sortArgs<M extends Mapper>(
-    M mapper,
-    List<Type> neededFromTypes,
+  HashMap<Type, List<Object>> _createInput(
+    List<Type> types,
+    List<Object> sources,
   ) {
-    final fromTypes = List.from(neededFromTypes);
-    final args = HashMap<int, int>();
+    final input = HashMap<Type, List<Object>>();
 
-    for (var i = 0; i < mapper.fromTypes.length; i++) {
-      final type = mapper.fromTypes[i];
+    final typeIter = types.iterator;
+    final sourceIter = sources.iterator;
 
-      final index = fromTypes.indexWhere((e) => e == type);
+    for (var i = 0; i < types.length; i++) {
+      final type = typeIter.current;
+      final source = sourceIter.current;
 
-      fromTypes.removeAt(index);
-      args[i] = index;
+      if (input.containsKey(type)) {
+        input[type]!.add(source);
+      } else {
+        input[type] = [source];
+      }
+
+      typeIter.moveNext();
+      sourceIter.moveNext();
     }
 
-    return args;
+    return input;
   }
 }

@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import '../mappers/mappers.dart';
 import 'exceptions/exceptions.dart';
+import 'mapper_creator.dart';
 
 part 'mapster_impl.dart';
 
@@ -18,22 +19,22 @@ abstract class Mapster {
   /// the old [Mapper], then [Mapster] replaces old one with a new one.
   /// You can register multiple [Mapper]s at one.
   /// For this check [registerAll].
-  void register(Mapper mapper);
+  void register(MapperCreator mapperCreator);
 
   /// Use this method to register multiple [Mapper]s
   /// at once.
-  void registerAll(List<Mapper> mappers);
+  void registerAll(List<MapperCreator> mapperCreators);
 
   /// Map 1 object of type [FROM] to another object of type [TO].
   TO map<FROM extends Object, TO extends Object>(
-    FROM object,
+    FROM source,
     To<TO> to,
   );
 
   /// Map 2 objects of types [FROM1], [FROM2] to another object of type [TO].
   TO map2<FROM1 extends Object, FROM2 extends Object, TO extends Object>(
-    FROM1 object1,
-    FROM2 object2,
+    FROM1 source1,
+    FROM2 source2,
     To<TO> to,
   );
 
@@ -41,9 +42,9 @@ abstract class Mapster {
   /// to another object of type [TO].
   TO map3<FROM1 extends Object, FROM2 extends Object, FROM3 extends Object,
       TO extends Object>(
-    FROM1 object1,
-    FROM2 object2,
-    FROM3 object3,
+    FROM1 source1,
+    FROM2 source2,
+    FROM3 source3,
     To<TO> to,
   );
 
@@ -51,10 +52,10 @@ abstract class Mapster {
   /// to another object of type [TO].
   TO map4<FROM1 extends Object, FROM2 extends Object, FROM3 extends Object,
       FROM4 extends Object, TO extends Object>(
-    FROM1 object1,
-    FROM2 object2,
-    FROM3 object3,
-    FROM4 object4,
+    FROM1 source1,
+    FROM2 source2,
+    FROM3 source3,
+    FROM4 source4,
     To<TO> to,
   );
 
@@ -62,11 +63,11 @@ abstract class Mapster {
   /// to another object of type [TO].
   TO map5<FROM1 extends Object, FROM2 extends Object, FROM3 extends Object,
       FROM4 extends Object, FROM5 extends Object, TO extends Object>(
-    FROM1 object1,
-    FROM2 object2,
-    FROM3 object3,
-    FROM4 object4,
-    FROM5 object5,
+    FROM1 source1,
+    FROM2 source2,
+    FROM3 source3,
+    FROM4 source4,
+    FROM5 source5,
     To<TO> to,
   );
 
@@ -80,12 +81,12 @@ abstract class Mapster {
       FROM5 extends Object,
       FROM6 extends Object,
       TO extends Object>(
-    FROM1 object1,
-    FROM2 object2,
-    FROM3 object3,
-    FROM4 object4,
-    FROM5 object5,
-    FROM6 object6,
+    FROM1 source1,
+    FROM2 source2,
+    FROM3 source3,
+    FROM4 source4,
+    FROM5 source5,
+    FROM6 source6,
     To<TO> to,
   );
 
@@ -100,13 +101,13 @@ abstract class Mapster {
       FROM6 extends Object,
       FROM7 extends Object,
       TO extends Object>(
-    FROM1 object1,
-    FROM2 object2,
-    FROM3 object3,
-    FROM4 object4,
-    FROM5 object5,
-    FROM6 object6,
-    FROM7 object7,
+    FROM1 source1,
+    FROM2 source2,
+    FROM3 source3,
+    FROM4 source4,
+    FROM5 source5,
+    FROM6 source6,
+    FROM7 source7,
     To<TO> to,
   );
 
@@ -122,14 +123,14 @@ abstract class Mapster {
       FROM7 extends Object,
       FROM8 extends Object,
       TO extends Object>(
-    FROM1 object1,
-    FROM2 object2,
-    FROM3 object3,
-    FROM4 object4,
-    FROM5 object5,
-    FROM6 object6,
-    FROM7 object7,
-    FROM8 object8,
+    FROM1 source1,
+    FROM2 source2,
+    FROM3 source3,
+    FROM4 source4,
+    FROM5 source5,
+    FROM6 source6,
+    FROM7 source7,
+    FROM8 source8,
     To<TO> to,
   );
 
@@ -146,15 +147,15 @@ abstract class Mapster {
       FROM8 extends Object,
       FROM9 extends Object,
       TO extends Object>(
-    FROM1 object1,
-    FROM2 object2,
-    FROM3 object3,
-    FROM4 object4,
-    FROM5 object5,
-    FROM6 object6,
-    FROM7 object7,
-    FROM8 object8,
-    FROM9 object9,
+    FROM1 source1,
+    FROM2 source2,
+    FROM3 source3,
+    FROM4 source4,
+    FROM5 source5,
+    FROM6 source6,
+    FROM7 source7,
+    FROM8 source8,
+    FROM9 source9,
     To<TO> to,
   );
 }
