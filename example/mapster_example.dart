@@ -5,19 +5,19 @@ import 'package:mapster/mapster.dart';
 import 'models/models.dart';
 
 class UserToUserResponseMapper extends OneSourceMapper<User, UserResponse> {
-  const UserToUserResponseMapper();
+  UserToUserResponseMapper(super.input);
 
   @override
-  UserResponse map(User object) {
+  UserResponse map() {
     return UserResponse(
-      id: object.id,
-      fullName: '${object.firstName} ${object.lastName}',
+      id: source.id,
+      fullName: '${source.firstName} ${source.lastName}',
     );
   }
 }
 
 void oneSourceExample(Mapster mapster) {
-  mapster.register(const UserToUserResponseMapper());
+  mapster.register(UserToUserResponseMapper.new);
 
   const user = User(
     id: 1,
@@ -32,21 +32,21 @@ void oneSourceExample(Mapster mapster) {
 
 class UserPostToPostResponse
     extends TwoSourcesMapper<User, Post, PostResponse> {
-  const UserPostToPostResponse();
+  UserPostToPostResponse(super.input);
 
   @override
-  PostResponse map(User object1, Post object2) {
+  PostResponse map() {
     return PostResponse(
-      id: object2.id,
-      text: object2.text,
-      userID: object1.id,
-      userName: '${object1.firstName} ${object1.lastName}',
+      id: source2.id,
+      text: source2.text,
+      userID: source1.id,
+      userName: '${source1.firstName} ${source1.lastName}',
     );
   }
 }
 
 void twoSourcesExample(Mapster mapster) {
-  mapster.register(const UserPostToPostResponse());
+  mapster.register(UserPostToPostResponse.new);
 
   const user = User(
     id: 1,
@@ -69,23 +69,23 @@ void twoSourcesExample(Mapster mapster) {
 
 class UserUserPostToLikedPostNotification
     extends ThreeSourcesMapper<User, User, Post, LikedPostNotification> {
-  const UserUserPostToLikedPostNotification();
+  UserUserPostToLikedPostNotification(super.input);
 
   @override
-  LikedPostNotification map(User object1, User object2, Post object3) {
+  LikedPostNotification map() {
     return LikedPostNotification(
-      postID: object3.id,
-      authorID: object1.id,
-      likeUserID: object2.id,
-      postText: object3.text,
-      authorName: '${object1.firstName} ${object1.lastName}',
-      likeUserName: '${object2.firstName} ${object2.lastName}',
+      postID: source3.id,
+      authorID: source1.id,
+      likeUserID: source2.id,
+      postText: source3.text,
+      authorName: '${source1.firstName} ${source1.lastName}',
+      likeUserName: '${source2.firstName} ${source2.lastName}',
     );
   }
 }
 
 void threeSourcesExample(Mapster mapster) {
-  mapster.register(const UserUserPostToLikedPostNotification());
+  mapster.register(UserUserPostToLikedPostNotification.new);
 
   const user = User(
     id: 1,
@@ -128,13 +128,13 @@ void threeSourcesExample(Mapster mapster) {
 
 class AnotherUserToUserResponseMapper
     extends OneSourceMapper<User, UserResponse> {
-  const AnotherUserToUserResponseMapper();
+  AnotherUserToUserResponseMapper(super.input);
 
   @override
-  UserResponse map(User object) {
+  UserResponse map() {
     return UserResponse(
-      id: object.id,
-      fullName: '${object.lastName} ${object.firstName}',
+      id: source.id,
+      fullName: '${source.lastName} ${source.firstName}',
     );
   }
 }
@@ -146,7 +146,7 @@ void redefineOneSourceExample(Mapster mapster) {
     lastName: 'Potter',
   );
 
-  mapster.register(const UserToUserResponseMapper());
+  mapster.register(UserToUserResponseMapper.new);
 
   print(mapster.map(user, To<UserResponse>()));
 
@@ -154,7 +154,7 @@ void redefineOneSourceExample(Mapster mapster) {
   // Mapster stores Mappers based on its source types and result type.
   // If new Mapper has the same set of input types and the same output type as
   // the old Mapper, then Mapster replaces old one with a new one.
-  mapster.register(const AnotherUserToUserResponseMapper());
+  mapster.register(AnotherUserToUserResponseMapper.new);
 
   print(mapster.map(user, To<UserResponse>()));
 }
