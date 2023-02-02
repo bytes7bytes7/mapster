@@ -7,12 +7,14 @@ import 'to.dart';
 T getSource<T extends Object>(MapperInput input) =>
     (input[T] as List<T>).removeAt(0);
 
-typedef MapperInput = HashMap<Type, Object>;
+/// Input parameters for [Mapper].
+typedef MapperInput = HashMap<Type, List<Object>>;
 
 /// Base class for all mappers.
 abstract class Mapper<TO extends Object> {
   const Mapper(MapperInput input);
 
+  /// Mapping method.
   TO map();
 
   /// Types of source objects.

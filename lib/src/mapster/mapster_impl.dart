@@ -460,11 +460,11 @@ class _MapsterImpl implements Mapster {
     return null;
   }
 
-  HashMap<Type, List<Object>> _createInput(
+  MapperInput _createInput(
     List<Type> types,
     List<Object> sources,
   ) {
-    final input = HashMap<Type, List<Object>>();
+    final input = MapperInput();
 
     final typeIter = types.iterator;
     final sourceIter = sources.iterator;

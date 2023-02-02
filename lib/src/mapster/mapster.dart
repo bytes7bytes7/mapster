@@ -6,22 +6,24 @@ import 'mapper_creator.dart';
 
 part 'mapster_impl.dart';
 
-/// Class that contains all registered [Mapper]
+/// Class that contains all registered [MapperCreator]s.
 /// and use the proper [Mapper] for mapping
-/// based on types.
+/// based on input types and output type.
 abstract class Mapster {
   factory Mapster() = _MapsterImpl;
 
-  /// Use this method to register your [Mapper]
+  /// Use this method to register your [MapperCreator]
   /// before using [Mapster].
-  /// [Mapster] stores [Mapper]s based on its source types and result type.
-  /// If new [Mapper] has the same set of input types and the same output type as
+  /// [Mapster] stores [MapperCreator]s based on it's [Mapper]'s source
+  /// types and result type.
+  /// If new [MapperCreator] creates [Mapper] that has the same
+  /// set of input types and the same output type as
   /// the old [Mapper], then [Mapster] replaces old one with a new one.
-  /// You can register multiple [Mapper]s at one.
+  /// You can register multiple [MapperCreator]s at one.
   /// For this check [registerAll].
   void register(MapperCreator mapperCreator);
 
-  /// Use this method to register multiple [Mapper]s
+  /// Use this method to register multiple [MapperCreator]s
   /// at once.
   void registerAll(List<MapperCreator> mapperCreators);
 
