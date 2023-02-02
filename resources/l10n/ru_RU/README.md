@@ -24,13 +24,13 @@ Mapster - библиотека конвертации объектов.
 
  ```dart
 class UserToUserResponseMapper extends OneSourceMapper<User, UserResponse> {
-  const UserToUserResponseMapper();
+  UserToUserResponseMapper(super.input);
 
   @override
-  UserResponse map(User object) {
+  UserResponse map() {
     return UserResponse(
-      id: object.id,
-      fullName: '${object.firstName} ${object.lastName}',
+      id: source.id,
+      fullName: '${source.firstName} ${source.lastName}',
     );
   }
 }
@@ -50,7 +50,7 @@ void main() {
 void main() {
   final mapster = Mapster();
 
-  mapster.register(const UserToUserResponseMapper());
+  mapster.register(UserToUserResponseMapper.new);
 }
 ```
 
@@ -60,7 +60,7 @@ void main() {
 void main() {
   final mapster = Mapster();
 
-  mapster.register(const UserToUserResponseMapper());
+  mapster.register(UserToUserResponseMapper.new);
 
   const user = User(
     id: 1,
@@ -86,15 +86,15 @@ void main() {
 
 ```dart
 class UserPostToPostResponse extends TwoSourcesMapper<User, Post, PostResponse> {
-  const UserPostToPostResponse();
+  UserPostToPostResponse(super.input);
 
   @override
-  PostResponse map(User object1, Post object2) {
+  PostResponse map() {
     return PostResponse(
-      id: object2.id,
-      text: object2.text,
-      userID: object1.id,
-      userName: '${object1.firstName} ${object1.lastName}',
+      id: source2.id,
+      text: source2.text,
+      userID: source1.id,
+      userName: '${source1.firstName} ${source1.lastName}',
     );
   }
 }
@@ -102,7 +102,7 @@ class UserPostToPostResponse extends TwoSourcesMapper<User, Post, PostResponse> 
 void main() {
   final mapster = Mapster();
 
-  mapster.register(const UserPostToPostResponse());
+  mapster.register(UserPostToPostResponse.new);
 
   const user = User(
     id: 1,
@@ -128,17 +128,17 @@ void main() {
 ```dart
 class UserUserPostToLikedPostNotification
     extends ThreeSourcesMapper<User, User, Post, LikedPostNotification> {
-  const UserUserPostToLikedPostNotification();
+  UserUserPostToLikedPostNotification(super.input);
 
   @override
-  LikedPostNotification map(User object1, User object2, Post object3) {
+  LikedPostNotification map() {
     return LikedPostNotification(
-      postID: object3.id,
-      authorID: object1.id,
-      likeUserID: object2.id,
-      postText: object3.text,
-      authorName: '${object1.firstName} ${object1.lastName}',
-      likeUserName: '${object2.firstName} ${object2.lastName}',
+      postID: source3.id,
+      authorID: source1.id,
+      likeUserID: source2.id,
+      postText: source3.text,
+      authorName: '${source1.firstName} ${source1.lastName}',
+      likeUserName: '${source2.firstName} ${source2.lastName}',
     );
   }
 }
@@ -146,7 +146,7 @@ class UserUserPostToLikedPostNotification
 void main() {
   final mapster = Mapster();
 
-  mapster.register(const UserUserPostToLikedPostNotification());
+  mapster.register(UserUserPostToLikedPostNotification.new);
 
   const user = User(
     id: 1,
@@ -191,8 +191,10 @@ void main() {
 
 - Вам не нужно указывать типы в `<>` при использовании `register`, `registerAll` и `map`
   функций `Mapster`'а
-- `Mapster` зависит только от пакета `meta`
+- `Mapster` не имеет зависимостей
 - `Mapster` имеет временную сложность О(1) поиска подходящего `Mapper`'а
+- `Mapster` имеет временную сложность О(n) упорядочивания входных объектов перед передачей их
+  в `Mapper`
 - Вам больше не потребуется передавать огромное количество мапперов в ваши классы/функции. Добавьте
   только `Mapster`
 - Вам не нужно волноваться о порядке параметров
@@ -202,8 +204,7 @@ void main() {
 
 ### Минусы
 
-- `Mapster` имеет временную сложность О(n^2) упорядочивания входных объектов перед передачей их
-  в `Mapper`
+- not found yet🙂
 
 ## Другие особенности
 
@@ -216,8 +217,8 @@ void main() {
   final mapster = Mapster()
     ..registerAll(
       const [
-        UserToUserResponseMapper(),
-        UserUserPostToLikedPostNotification(),
+        UserToUserResponseMapper.new,
+        UserUserPostToLikedPostNotification.new,
       ],
     );
 }
@@ -237,13 +238,13 @@ void main(Mapster mapster) {
   );
 
   // Регистрация Mapper'а с входным типом: User и выходным типом: UserResponse
-  mapster.register(const UserToUserResponseMapper());
+  mapster.register(UserToUserResponseMapper.new);
 
   final userResponse1 = mapster.map(user, To<UserResponse>());
 
   // Регистрация другого Mapper'а с теми же типами: 
   // входной тип: User, выходной тип: UserResponse
-  mapster.register(const AnotherUserToUserResponseMapper());
+  mapster.register(AnotherUserToUserResponseMapper.new);
 
   final userResponse2 = mapster.map(user, To<UserResponse>());
 }
@@ -262,13 +263,13 @@ void main(Mapster mapster) {
   );
 
   // Регистрация Mapper'а с входным типом: User и выходным типом: UserResponse
-  mapster.register(const UserToUserResponseMapper());
+  mapster.register(UserToUserResponseMapper.new);
 
   final userResponse1 = mapster.map(user, To<UserResponse>());
 
   // Регистрация другого Mapper'а с поменяными входным и выходным типами: 
   // входной тип: UserResponse, выходной тип: User
-  mapster.register(const UserResponseToUserMapper());
+  mapster.register(UserResponseToUserMapper.new);
 
   // Т. к. набор входных типов 1-го Mapper'а содержит
   // другие типы по сравнению с набором входных типов 2-го Mapper'а,
@@ -302,8 +303,8 @@ class MapsterRegistrar {
   void register() {
     _mediator.registerAll(
       [
-        UserToUserResponseMapper(),
-        UserUserPostToLikedPostNotification(),
+        UserToUserResponseMapper.new,
+        UserUserPostToLikedPostNotification.new,
       ],
     );
   }

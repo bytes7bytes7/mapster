@@ -1,3 +1,13 @@
+## 0.2.0
+
+- Add `map` method to `Mapper`
+- Remove `map` from `Mapper`'s inheritors
+- Add sources to `Mapper`s
+- Speed up `Mapster`
+- Change signature of `register`, `registerAll` in `Mapster`
+- Add `MapperInput`, `MapperCreator`
+- Fix mappers (from `FourSourcesMapper` to `NineSourcesMapper`)
+
 ## 0.1.0
 
 - Change signature of `Mapster`'s `map` functions.
