@@ -466,8 +466,8 @@ class _MapsterImpl implements Mapster {
   ) {
     final input = MapperInput();
 
-    final typeIter = types.iterator;
-    final sourceIter = sources.iterator;
+    final typeIter = types.iterator..moveNext();
+    final sourceIter = sources.iterator..moveNext();
 
     for (var i = 0; i < types.length; i++) {
       final type = typeIter.current;
