@@ -1,4 +1,4 @@
-import '../mapper_creator.dart';
+import '../mapper_meta.dart';
 
 class MapperCreatorNotRegistered<T extends MapperCreator> implements Exception {
   @override

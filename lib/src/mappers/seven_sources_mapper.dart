@@ -26,15 +26,4 @@ abstract class SevenSourcesMapper<
   final FROM5 source5;
   final FROM6 source6;
   final FROM7 source7;
-
-  @override
-  List<Type> get fromTypes => [
-        FROM1,
-        FROM2,
-        FROM3,
-        FROM4,
-        FROM5,
-        FROM6,
-        FROM7,
-      ];
 }

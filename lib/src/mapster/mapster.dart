@@ -2,7 +2,7 @@ import 'dart:collection';
 
 import '../mappers/mappers.dart';
 import 'exceptions/exceptions.dart';
-import 'mapper_creator.dart';
+import 'mapper_meta.dart';
 
 part 'mapster_impl.dart';
 
@@ -19,13 +19,9 @@ abstract class Mapster {
   /// If new [MapperCreator] creates [Mapper] that has the same
   /// set of input types and the same output type as
   /// the old [Mapper], then [Mapster] replaces old one with a new one.
-  /// You can register multiple [MapperCreator]s at one.
-  /// For this check [registerAll].
-  void register(MapperCreator mapperCreator);
-
-  /// Use this method to register multiple [MapperCreator]s
-  /// at once.
-  void registerAll(List<MapperCreator> mapperCreators);
+  void register(
+    MapperMeta mapperMeta,
+  );
 
   /// Map 1 object of type [FROM] to another object of type [TO].
   TO map<FROM extends Object, TO extends Object>(

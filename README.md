@@ -227,7 +227,9 @@ void main() {
 You can redefine `Mapper` by calling `register`/`registerAll` again, like that:
 
 ```dart
-void main(Mapster mapster) {
+void main() {
+  final mapster = Mapster();
+
   const user = User(
     id: 1,
     firstName: 'Harry',
@@ -252,7 +254,9 @@ set of input types (an order of input types does NOT matter) and the same output
 old `Mapper`, then `Mapster` replaces old one with a new one.
 
 ```dart
-void main(Mapster mapster) {
+void main() {
+  final mapster = Mapster();
+
   const user = User(
     id: 1,
     firstName: 'Harry',
@@ -298,7 +302,7 @@ class MapsterRegistrar {
 
   @postConstruct
   void register() {
-    _mediator.registerAll(
+    _mapster.registerAll(
       [
         UserToUserResponseMapper.new,
         UserUserPostToLikedPostNotification.new,

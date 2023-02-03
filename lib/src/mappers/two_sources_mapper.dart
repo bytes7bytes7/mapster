@@ -9,10 +9,4 @@ abstract class TwoSourcesMapper<FROM1 extends Object, FROM2 extends Object,
 
   final FROM1 source1;
   final FROM2 source2;
-
-  @override
-  List<Type> get fromTypes => [
-        FROM1,
-        FROM2,
-      ];
 }

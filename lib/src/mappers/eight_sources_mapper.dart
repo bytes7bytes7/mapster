@@ -29,16 +29,4 @@ abstract class EightSourcesMapper<
   final FROM6 source6;
   final FROM7 source7;
   final FROM8 source8;
-
-  @override
-  List<Type> get fromTypes => [
-        FROM1,
-        FROM2,
-        FROM3,
-        FROM4,
-        FROM5,
-        FROM6,
-        FROM7,
-        FROM8,
-      ];
 }

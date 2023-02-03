@@ -6,9 +6,4 @@ abstract class OneSourceMapper<FROM extends Object, TO extends Object>
   OneSourceMapper(super.input) : source = getSource<FROM>(input);
 
   final FROM source;
-
-  @override
-  List<Type> get fromTypes => [
-        FROM,
-      ];
 }

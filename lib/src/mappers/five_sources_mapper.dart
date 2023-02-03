@@ -20,13 +20,4 @@ abstract class FiveSourcesMapper<
   final FROM3 source3;
   final FROM4 source4;
   final FROM5 source5;
-
-  @override
-  List<Type> get fromTypes => [
-        FROM1,
-        FROM2,
-        FROM3,
-        FROM4,
-        FROM5,
-      ];
 }

@@ -17,7 +17,7 @@ class UserToUserResponseMapper extends OneSourceMapper<User, UserResponse> {
 }
 
 void oneSourceExample(Mapster mapster) {
-  mapster.register(UserToUserResponseMapper.new);
+  mapster.register(MapperMeta.one(UserToUserResponseMapper.new));
 
   const user = User(
     id: 1,
@@ -46,7 +46,7 @@ class UserPostToPostResponse
 }
 
 void twoSourcesExample(Mapster mapster) {
-  mapster.register(UserPostToPostResponse.new);
+  mapster.register(MapperMeta.two(UserPostToPostResponse.new));
 
   const user = User(
     id: 1,
@@ -85,7 +85,7 @@ class UserUserPostToLikedPostNotification
 }
 
 void threeSourcesExample(Mapster mapster) {
-  mapster.register(UserUserPostToLikedPostNotification.new);
+  mapster.register(MapperMeta.three(UserUserPostToLikedPostNotification.new));
 
   const user = User(
     id: 1,
@@ -146,7 +146,7 @@ void redefineOneSourceExample(Mapster mapster) {
     lastName: 'Potter',
   );
 
-  mapster.register(UserToUserResponseMapper.new);
+  mapster.register(MapperMeta.one(UserToUserResponseMapper.new));
 
   print(mapster.map(user, To<UserResponse>()));
 
@@ -154,7 +154,7 @@ void redefineOneSourceExample(Mapster mapster) {
   // Mapster stores Mappers based on its source types and result type.
   // If new Mapper has the same set of input types and the same output type as
   // the old Mapper, then Mapster replaces old one with a new one.
-  mapster.register(AnotherUserToUserResponseMapper.new);
+  mapster.register(MapperMeta.one(AnotherUserToUserResponseMapper.new));
 
   print(mapster.map(user, To<UserResponse>()));
 }

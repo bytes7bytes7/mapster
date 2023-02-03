@@ -230,7 +230,9 @@ void main() {
 образом:
 
 ```dart
-void main(Mapster mapster) {
+void main() {
+  final mapster = Mapster();
+
   const user = User(
     id: 1,
     firstName: 'Harry',
@@ -255,7 +257,9 @@ void main(Mapster mapster) {
 старого `Mapper`, тогда `Mapster` заменит старый на новый.
 
 ```dart
-void main(Mapster mapster) {
+void main() {
+  final mapster = Mapster();
+
   const user = User(
     id: 1,
     firstName: 'Harry',
@@ -301,7 +305,7 @@ class MapsterRegistrar {
 
   @postConstruct
   void register() {
-    _mediator.registerAll(
+    _mapster.registerAll(
       [
         UserToUserResponseMapper.new,
         UserUserPostToLikedPostNotification.new,

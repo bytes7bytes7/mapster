@@ -11,11 +11,4 @@ abstract class ThreeSourcesMapper<FROM1 extends Object, FROM2 extends Object,
   final FROM1 source1;
   final FROM2 source2;
   final FROM3 source3;
-
-  @override
-  List<Type> get fromTypes => [
-        FROM1,
-        FROM2,
-        FROM3,
-      ];
 }

@@ -23,14 +23,4 @@ abstract class SixSourcesMapper<
   final FROM4 source4;
   final FROM5 source5;
   final FROM6 source6;
-
-  @override
-  List<Type> get fromTypes => [
-        FROM1,
-        FROM2,
-        FROM3,
-        FROM4,
-        FROM5,
-        FROM6,
-      ];
 }

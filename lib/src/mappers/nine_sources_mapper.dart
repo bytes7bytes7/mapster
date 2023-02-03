@@ -32,17 +32,4 @@ abstract class NineSourcesMapper<
   final FROM7 source7;
   final FROM8 source8;
   final FROM9 source9;
-
-  @override
-  List<Type> get fromTypes => [
-        FROM1,
-        FROM2,
-        FROM3,
-        FROM4,
-        FROM5,
-        FROM6,
-        FROM7,
-        FROM8,
-        FROM9,
-      ];
 }

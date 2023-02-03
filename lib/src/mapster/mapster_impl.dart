@@ -4,19 +4,11 @@ class _MapsterImpl implements Mapster {
   final _mapperCreators = HashMap<String, MapperCreator>();
 
   @override
-  void register(MapperCreator mapperCreator) {
-    // Create mapper to get `to` and `fromTypes`
-    final mapper = mapperCreator(MapperInput());
-
-    _mapperCreators[_getMapperCreatorID(mapper.to, mapper.fromTypes)] =
-        mapperCreator;
-  }
-
-  @override
-  void registerAll(List<MapperCreator> mapperCreators) {
-    for (final mapperCreator in mapperCreators) {
-      register(mapperCreator);
-    }
+  void register(
+    MapperMeta mapperMeta,
+  ) {
+    _mapperCreators[_getMapperCreatorID(mapperMeta.to, mapperMeta.from)] =
+        mapperMeta.mapperCreator;
   }
 
   @override

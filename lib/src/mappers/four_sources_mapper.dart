@@ -17,12 +17,4 @@ abstract class FourSourcesMapper<
   final FROM2 source2;
   final FROM3 source3;
   final FROM4 source4;
-
-  @override
-  List<Type> get fromTypes => [
-        FROM1,
-        FROM2,
-        FROM3,
-        FROM4,
-      ];
 }
