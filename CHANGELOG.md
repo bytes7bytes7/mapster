@@ -7,7 +7,8 @@
 - Change signature of `register`, `registerAll` in `Mapster`
 - Add `MapperInput`, `MapperCreator`
 - Fix mappers (from `FourSourcesMapper` to `NineSourcesMapper`)
-- Remove `to`, `fromTypes` in `Mapper`
+- Create `MapperMeta`
+- Move `to`, `fromTypes` from `Mapper` to `MapperMeta`
 
 ## 0.1.0
 

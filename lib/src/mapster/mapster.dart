@@ -12,7 +12,7 @@ part 'mapster_impl.dart';
 abstract class Mapster {
   factory Mapster() = _MapsterImpl;
 
-  /// Use this method to register your [MapperCreator]
+  /// Use this method to register your [MapperCreator] via [MapperMeta]
   /// before using [Mapster].
   /// [Mapster] stores [MapperCreator]s based on it's [Mapper]'s source
   /// types and result type.
