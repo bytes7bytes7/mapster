@@ -11,7 +11,6 @@ Mapster is an object mapping library.
     - [Pros](#pros)
     - [Cons](#cons)
 - [Other features](#other-features)
-    - [registerAll](#registerall)
     - [Redefine Mapper](#redefine-mapper)
 - [Work with injectable](#work-with-injectable)
 
@@ -44,13 +43,14 @@ void main() {
 }
 ```
 
-3. Register all your `Mapper`s in created instance of `Mapster`.
+3. Register all your `Mapper`s in created instance of `Mapster`. Use `MapperMeta`'s static
+   methods: `one`, `two`, ... , `nine` depend on `Mapper` type.
 
 ```dart
 void main() {
   final mapster = Mapster();
 
-  mapster.register(UserToUserResponseMapper.new);
+  mapster.register(MapperMeta.one(UserToUserResponseMapper.new));
 }
 ```
 
@@ -60,7 +60,7 @@ void main() {
 void main() {
   final mapster = Mapster();
 
-  mapster.register(UserToUserResponseMapper.new);
+  mapster.register(MapperMeta.one(UserToUserResponseMapper.new));
 
   const user = User(
     id: 1,
@@ -102,7 +102,7 @@ class UserPostToPostResponse extends TwoSourcesMapper<User, Post, PostResponse> 
 void main() {
   final mapster = Mapster();
 
-  mapster.register(UserPostToPostResponse.new);
+  mapster.register(MapperMeta.two(UserPostToPostResponse.new));
 
   const user = User(
     id: 1,
@@ -145,7 +145,7 @@ class UserUserPostToLikedPostNotification
 void main() {
   final mapster = Mapster();
 
-  mapster.register(UserUserPostToLikedPostNotification.new);
+  mapster.register(MapperMeta.three(UserUserPostToLikedPostNotification.new));
 
   const user = User(
     id: 1,
@@ -188,11 +188,11 @@ void main() {
 
 ### Pros
 
-- Do not need to specify types in `<>` during using `register`, `registerAll`, and `map` functions
-  of `Mapster`
+- Do not need to specify types in `<>` during using `register` and `map` functions of `Mapster`
 - `Mapster` has no dependency
 - `Mapster` has O(1) time complexity of searching for a proper `Mapper`
-- `Mapster` has O(n) time complexity of ordering arguments before passing them to a `Mapper`
+- `Mapster` has O(n) time complexity (where n is an amount of parameters) of ordering arguments
+  before passing them to a `Mapper`
 - Do not need to inject your classes/functions with large amount of mappers anymore. Just inject
   with `Mapster`
 - Do not need to worry about the order of parameters
@@ -206,25 +206,9 @@ void main() {
 
 ## Other features
 
-### registerAll
-
-You can register multiple `Mapper`s using `registerAll` method, like that:
-
-```dart
-void main() {
-  final mapster = Mapster()
-    ..registerAll(
-      const [
-        UserToUserResponseMapper.new,
-        UserUserPostToLikedPostNotification.new,
-      ],
-    );
-}
-```
-
 ### Redefine Mapper
 
-You can redefine `Mapper` by calling `register`/`registerAll` again, like that:
+You can redefine `Mapper` by calling `register` again, like that:
 
 ```dart
 void main() {
@@ -237,13 +221,13 @@ void main() {
   );
 
   // Register Mapper with input type: User, and output type: UserResponse.
-  mapster.register(UserToUserResponseMapper.new);
+  mapster.register(MapperMeta.one(UserToUserResponseMapper.new));
 
   final userResponse1 = mapster.map(user, To<UserResponse>());
 
   // Register another Mapper with the same types: 
   // input type: User, and output type: UserResponse.
-  mapster.register(AnotherUserToUserResponseMapper.new);
+  mapster.register(MapperMeta.one(AnotherUserToUserResponseMapper.new));
 
   final userResponse2 = mapster.map(user, To<UserResponse>());
 }
@@ -264,13 +248,13 @@ void main() {
   );
 
   // Register Mapper with input type: User, and output type: UserResponse.
-  mapster.register(UserToUserResponseMapper.new);
+  mapster.register(MapperMeta.one(UserToUserResponseMapper.new));
 
   final userResponse1 = mapster.map(user, To<UserResponse>());
 
   // Register another Mapper with swapped result and input types: 
   // input type: UserResponse, and output type: User.
-  mapster.register(UserResponseToUserMapper.new);
+  mapster.register(MapperMeta.one(UserResponseToUserMapper.new));
 
   // Because input types set of the 1st Mapper contains
   // different types than input types set of the 2nd Mapper,
@@ -302,11 +286,10 @@ class MapsterRegistrar {
 
   @postConstruct
   void register() {
-    _mapster.registerAll(
-      [
-        UserToUserResponseMapper.new,
-        UserUserPostToLikedPostNotification.new,
-      ],
+    _mapster..register(
+      MapperMeta.one(UserToUserResponseMapper.new),
+    )..register(
+      MapperMeta.three(UserUserPostToLikedPostNotification.new),
     );
   }
 }

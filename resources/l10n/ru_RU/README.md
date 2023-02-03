@@ -11,7 +11,6 @@ Mapster - библиотека конвертации объектов.
     - [Плюсы](#плюсы)
     - [Минусы](#минусы)
 - [Другие особенности](#другие-особенности)
-    - [registerAll](#registerall)
     - [Переопределение Mapper](#переопределение-Mapper)
 - [Работа с injectable](#работа-с-injectable)
 
@@ -44,13 +43,14 @@ void main() {
 }
 ```
 
-3. Зарегистрируйте все `Mapper`'ы в созданном экземпляре `Mapster`.
+3. Зарегистрируйте все `Mapper`'ы в созданном экземпляре `Mapster`. Используйте статические
+   методы `MapperMeta`: `one`, `two`, ... , `nine` в зависимости от типа `Mapper`'а.
 
 ```dart
 void main() {
   final mapster = Mapster();
 
-  mapster.register(UserToUserResponseMapper.new);
+  mapster.register(MapperMeta.one(UserToUserResponseMapper.new));
 }
 ```
 
@@ -60,7 +60,7 @@ void main() {
 void main() {
   final mapster = Mapster();
 
-  mapster.register(UserToUserResponseMapper.new);
+  mapster.register(MapperMeta.one(UserToUserResponseMapper.new));
 
   const user = User(
     id: 1,
@@ -102,7 +102,7 @@ class UserPostToPostResponse extends TwoSourcesMapper<User, Post, PostResponse> 
 void main() {
   final mapster = Mapster();
 
-  mapster.register(UserPostToPostResponse.new);
+  mapster.register(MapperMeta.two(UserPostToPostResponse.new));
 
   const user = User(
     id: 1,
@@ -146,7 +146,7 @@ class UserUserPostToLikedPostNotification
 void main() {
   final mapster = Mapster();
 
-  mapster.register(UserUserPostToLikedPostNotification.new);
+  mapster.register(MapperMeta.three(UserUserPostToLikedPostNotification.new));
 
   const user = User(
     id: 1,
@@ -193,8 +193,8 @@ void main() {
   функций `Mapster`'а
 - `Mapster` не имеет зависимостей
 - `Mapster` имеет временную сложность О(1) поиска подходящего `Mapper`'а
-- `Mapster` имеет временную сложность О(n) упорядочивания входных объектов перед передачей их
-  в `Mapper`
+- `Mapster` имеет временную сложность О(n) (где n - количество параметров) упорядочивания входных
+  объектов перед передачей их в `Mapper`
 - Вам больше не потребуется передавать огромное количество мапперов в ваши классы/функции. Добавьте
   только `Mapster`
 - Вам не нужно волноваться о порядке параметров
@@ -208,26 +208,9 @@ void main() {
 
 ## Другие особенности
 
-### registerAll
-
-Вы можете зарегистрировать несколько `Mapper`'ов, используя метод `registerAll`, следующим образом:
-
-```dart
-void main() {
-  final mapster = Mapster()
-    ..registerAll(
-      const [
-        UserToUserResponseMapper.new,
-        UserUserPostToLikedPostNotification.new,
-      ],
-    );
-}
-```
-
 ### Переопределение Mapper
 
-Вы можете переопределить `Mapper`, повторно воспользовавшись `register`/`registerAll`, следующим
-образом:
+Вы можете переопределить `Mapper`, повторно воспользовавшись `register` следующим образом:
 
 ```dart
 void main() {
@@ -240,13 +223,13 @@ void main() {
   );
 
   // Регистрация Mapper'а с входным типом: User и выходным типом: UserResponse
-  mapster.register(UserToUserResponseMapper.new);
+  mapster.register(MapperMeta.one(UserToUserResponseMapper.new));
 
   final userResponse1 = mapster.map(user, To<UserResponse>());
 
   // Регистрация другого Mapper'а с теми же типами: 
   // входной тип: User, выходной тип: UserResponse
-  mapster.register(AnotherUserToUserResponseMapper.new);
+  mapster.register(MapperMeta.one(AnotherUserToUserResponseMapper.new));
 
   final userResponse2 = mapster.map(user, To<UserResponse>());
 }
@@ -267,13 +250,13 @@ void main() {
   );
 
   // Регистрация Mapper'а с входным типом: User и выходным типом: UserResponse
-  mapster.register(UserToUserResponseMapper.new);
+  mapster.register(MapperMeta.one(UserToUserResponseMapper.new));
 
   final userResponse1 = mapster.map(user, To<UserResponse>());
 
   // Регистрация другого Mapper'а с поменяными входным и выходным типами: 
   // входной тип: UserResponse, выходной тип: User
-  mapster.register(UserResponseToUserMapper.new);
+  mapster.register(MapperMeta.one(UserResponseToUserMapper.new));
 
   // Т. к. набор входных типов 1-го Mapper'а содержит
   // другие типы по сравнению с набором входных типов 2-го Mapper'а,
@@ -305,11 +288,10 @@ class MapsterRegistrar {
 
   @postConstruct
   void register() {
-    _mapster.registerAll(
-      [
-        UserToUserResponseMapper.new,
-        UserUserPostToLikedPostNotification.new,
-      ],
+    _mapster..register(
+      MapperMeta.one(UserToUserResponseMapper.new),
+    )..register(
+      MapperMeta.three(UserUserPostToLikedPostNotification.new),
     );
   }
 }
