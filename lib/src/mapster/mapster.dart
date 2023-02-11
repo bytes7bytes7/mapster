@@ -3,6 +3,7 @@ import 'dart:collection';
 import '../mappers/mappers.dart';
 import 'exceptions/exceptions.dart';
 import 'mapper_meta.dart';
+import 'to.dart';
 
 part 'mapster_impl.dart';
 

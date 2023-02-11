@@ -9,5 +9,5 @@ class To<T extends Object> {
 
   @override
   bool operator ==(covariant To other) =>
-      identical(this, other) || other.to == other.to;
+      identical(this, other) || to == other.to;
 }

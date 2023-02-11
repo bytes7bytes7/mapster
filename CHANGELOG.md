@@ -1,3 +1,7 @@
+## 0.2.1
+
+- Fix mistake in `To`.
+
 ## 0.2.0
 
 - Add `map` method to `Mapper`
