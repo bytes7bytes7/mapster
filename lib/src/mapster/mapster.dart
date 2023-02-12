@@ -25,7 +25,7 @@ abstract class Mapster {
   );
 
   /// Map 1 object of type [FROM] to another object of type [TO].
-  TO map<FROM extends Object, TO extends Object>(
+  TO map1<FROM extends Object, TO extends Object>(
     FROM source,
     To<TO> to,
   );

@@ -86,7 +86,7 @@ void main() {
       const a = A(1);
 
       expect(
-        () => mapster.map(a, To<B>()),
+        () => mapster.map1(a, To<B>()),
         throwsA(
           TypeMatcher<
               MapperCreatorNotRegistered<
@@ -105,7 +105,7 @@ void main() {
       mapster.register(MapperMeta.one((_) => aToBMapper));
 
       expect(
-        () => mapster.map(a, To<B>()),
+        () => mapster.map1(a, To<B>()),
         returnsNormally,
       );
     },
@@ -119,7 +119,7 @@ void main() {
       mapster.register(MapperMeta.two((_) => aAndCToDMapper));
 
       expect(
-        () => mapster.map(a, To<B>()),
+        () => mapster.map1(a, To<B>()),
         throwsA(
           TypeMatcher<
               MapperCreatorNotRegistered<
@@ -145,7 +145,7 @@ void main() {
         );
 
       expect(
-        () => mapster.map(a, To<B>()),
+        () => mapster.map1(a, To<B>()),
         returnsNormally,
       );
     },
@@ -159,7 +159,7 @@ void main() {
       const a = A(1);
       mapster.register(MapperMeta.one((_) => aToBMapper));
 
-      final result = mapster.map(a, To<B>());
+      final result = mapster.map1(a, To<B>());
 
       expect(
         result,
@@ -182,7 +182,7 @@ void main() {
           MapperMeta.one((_) => aToBMapper),
         );
 
-      final result = mapster.map(a, To<B>());
+      final result = mapster.map1(a, To<B>());
 
       expect(
         result,
@@ -205,7 +205,7 @@ void main() {
           MapperMeta.one((_) => aToBMapper),
         );
 
-      final result = mapster.map(a, To<B>());
+      final result = mapster.map1(a, To<B>());
 
       expect(
         result,
@@ -232,7 +232,7 @@ void main() {
         );
 
       expect(
-        () => mapster.map(a, To<B>()),
+        () => mapster.map1(a, To<B>()),
         returnsNormally,
       );
     },
@@ -254,7 +254,7 @@ void main() {
         );
 
       expect(
-        () => mapster.map(a, To<B>()),
+        () => mapster.map1(a, To<B>()),
         returnsNormally,
       );
     },
@@ -276,7 +276,7 @@ void main() {
         );
 
       expect(
-        () => mapster.map(a, To<B>()),
+        () => mapster.map1(a, To<B>()),
         returnsNormally,
       );
     },
@@ -298,7 +298,7 @@ void main() {
           MapperMeta.one((_) => anotherAToBMapper),
         );
 
-      final result = mapster.map(a, To<B>());
+      final result = mapster.map1(a, To<B>());
 
       expect(
         result,
@@ -343,7 +343,7 @@ void main() {
       mapster.register(MapperMeta.one((_) => aToBMapper));
 
       expect(
-        mapster.map(a, To<B>()),
+        mapster.map1(a, To<B>()),
         stubB,
       );
     },

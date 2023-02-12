@@ -8,10 +8,10 @@ abstract class FourSourcesMapper<
     FROM4 extends Object,
     TO extends Object> extends Mapper<TO> {
   FourSourcesMapper(super.input)
-      : source1 = getSource<FROM1>(input),
-        source2 = getSource<FROM2>(input),
-        source3 = getSource<FROM3>(input),
-        source4 = getSource<FROM4>(input);
+      : source1 = getMapperSourceByType<FROM1>(input),
+        source2 = getMapperSourceByType<FROM2>(input),
+        source3 = getMapperSourceByType<FROM3>(input),
+        source4 = getMapperSourceByType<FROM4>(input);
 
   final FROM1 source1;
   final FROM2 source2;

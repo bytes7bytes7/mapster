@@ -4,8 +4,8 @@ import 'mapper.dart';
 abstract class TwoSourcesMapper<FROM1 extends Object, FROM2 extends Object,
     TO extends Object> extends Mapper<TO> {
   TwoSourcesMapper(super.input)
-      : source1 = getSource<FROM1>(input),
-        source2 = getSource<FROM2>(input);
+      : source1 = getMapperSourceByType<FROM1>(input),
+        source2 = getMapperSourceByType<FROM2>(input);
 
   final FROM1 source1;
   final FROM2 source2;

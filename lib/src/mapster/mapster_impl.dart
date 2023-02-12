@@ -12,7 +12,7 @@ class _MapsterImpl implements Mapster {
   }
 
   @override
-  TO map<FROM extends Object, TO extends Object>(
+  TO map1<FROM extends Object, TO extends Object>(
     FROM source,
     To<TO> to,
   ) {

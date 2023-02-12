@@ -2,7 +2,7 @@
 
 import 'dart:collection';
 
-T getSource<T extends Object>(MapperInput input) =>
+T getMapperSourceByType<T extends Object>(MapperInput input) =>
     (input[T] as List).removeAt(0);
 
 /// Input parameters for [Mapper].

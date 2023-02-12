@@ -189,13 +189,14 @@ void main() {
 ### Pros
 
 - Do not need to specify types in `<>` during using `register` and `map` functions of `Mapster`
-- `Mapster` has no dependency
+- Do not need to worry about the order of parameters
+- Analyzer correctly determines a return type of `map` functions
 - `Mapster` has O(1) time complexity of searching for a proper `Mapper`
 - `Mapster` has O(n) time complexity (where n is an amount of parameters) of ordering arguments
   before passing them to a `Mapper`
+- `Mapster` has no dependency
 - Do not need to inject your classes/functions with large amount of mappers anymore. Just inject
   with `Mapster`
-- Do not need to worry about the order of parameters
 - Do not need to know a specific `Mapper` to map
 - Ability to specify `Mapper`s in a one place
 - Ability to redefine `Mapper`s

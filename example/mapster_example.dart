@@ -25,7 +25,7 @@ void oneSourceExample(Mapster mapster) {
     lastName: 'Potter',
   );
 
-  final userResponse = mapster.map(user, To<UserResponse>());
+  final userResponse = mapster.map1(user, To<UserResponse>());
 
   print(userResponse);
 }
@@ -148,7 +148,7 @@ void redefineOneSourceExample(Mapster mapster) {
 
   mapster.register(MapperMeta.one(UserToUserResponseMapper.new));
 
-  print(mapster.map(user, To<UserResponse>()));
+  print(mapster.map1(user, To<UserResponse>()));
 
   // You can redefine mappers
   // Mapster stores Mappers based on its source types and result type.
@@ -156,7 +156,7 @@ void redefineOneSourceExample(Mapster mapster) {
   // the old Mapper, then Mapster replaces old one with a new one.
   mapster.register(MapperMeta.one(AnotherUserToUserResponseMapper.new));
 
-  print(mapster.map(user, To<UserResponse>()));
+  print(mapster.map1(user, To<UserResponse>()));
 }
 
 void main() {
