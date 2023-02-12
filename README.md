@@ -68,7 +68,7 @@ void main() {
     lastName: 'Potter',
   );
 
-  final userResponse = mapster.map(user, To<UserResponse>());
+  final userResponse = mapster.map1(user, To<UserResponse>());
 }
 ```
 
@@ -77,7 +77,7 @@ should `Mapster` return.
 
 ## Map functions
 
-`Mapster` has 9 `map` methods: `map`, `map2`, ... , `map9`. All of them get source objects and
+`Mapster` has 9 `map` methods: `map1`, `map2`, ... , `map9`. All of them get source objects and
 then `To<YourResultType>()`.
 
 You can pass source objects to `Mapster`'s `map` methods in any order. You do not need to check the
@@ -224,13 +224,13 @@ void main() {
   // Register Mapper with input type: User, and output type: UserResponse.
   mapster.register(MapperMeta.one(UserToUserResponseMapper.new));
 
-  final userResponse1 = mapster.map(user, To<UserResponse>());
+  final userResponse1 = mapster.map1(user, To<UserResponse>());
 
   // Register another Mapper with the same types: 
   // input type: User, and output type: UserResponse.
   mapster.register(MapperMeta.one(AnotherUserToUserResponseMapper.new));
 
-  final userResponse2 = mapster.map(user, To<UserResponse>());
+  final userResponse2 = mapster.map1(user, To<UserResponse>());
 }
 ```
 
@@ -251,7 +251,7 @@ void main() {
   // Register Mapper with input type: User, and output type: UserResponse.
   mapster.register(MapperMeta.one(UserToUserResponseMapper.new));
 
-  final userResponse1 = mapster.map(user, To<UserResponse>());
+  final userResponse1 = mapster.map1(user, To<UserResponse>());
 
   // Register another Mapper with swapped result and input types: 
   // input type: UserResponse, and output type: User.
@@ -263,7 +263,7 @@ void main() {
   // Also we can say: because output type of the 1st Mapper not
   // equals to output type of the 2nd Mapper, these two
   // mappers considered as different.
-  final user2 = mapster.map(userResponse1, To<User>());
+  final user2 = mapster.map1(userResponse1, To<User>());
 }
 ```
 

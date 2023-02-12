@@ -1,3 +1,8 @@
+## 0.3.0
+
+- Rename `map` function to `map1` in `Mapster`
+- Make `MapperMeta` constructor private
+
 ## 0.2.1
 
 - Fix mistake in `To`.

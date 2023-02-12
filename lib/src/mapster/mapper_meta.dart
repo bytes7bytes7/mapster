@@ -6,7 +6,7 @@ typedef MapperCreator<M extends Mapper> = M Function(MapperInput input);
 
 /// Additional info about [Mapper] that needed during registering [Mapper].
 class MapperMeta {
-  MapperMeta({
+  MapperMeta._({
     required this.from,
     required this.to,
     required this.mapperCreator,
@@ -25,7 +25,7 @@ class MapperMeta {
   static MapperMeta one<FROM extends Object, TO extends Object>(
     MapperCreator<OneSourceMapper<FROM, TO>> mapperCreator,
   ) {
-    return MapperMeta(
+    return MapperMeta._(
       from: [
         FROM,
       ],
@@ -39,7 +39,7 @@ class MapperMeta {
       two<FROM1 extends Object, FROM2 extends Object, TO extends Object>(
     MapperCreator<TwoSourcesMapper<FROM1, FROM2, TO>> mapperCreator,
   ) {
-    return MapperMeta(
+    return MapperMeta._(
       from: [
         FROM1,
         FROM2,
@@ -54,7 +54,7 @@ class MapperMeta {
       FROM3 extends Object, TO extends Object>(
     MapperCreator<ThreeSourcesMapper<FROM1, FROM2, FROM3, TO>> mapperCreator,
   ) {
-    return MapperMeta(
+    return MapperMeta._(
       from: [
         FROM1,
         FROM2,
@@ -71,7 +71,7 @@ class MapperMeta {
     MapperCreator<FourSourcesMapper<FROM1, FROM2, FROM3, FROM4, TO>>
         mapperCreator,
   ) {
-    return MapperMeta(
+    return MapperMeta._(
       from: [
         FROM1,
         FROM2,
@@ -94,7 +94,7 @@ class MapperMeta {
     MapperCreator<FiveSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, TO>>
         mapperCreator,
   ) {
-    return MapperMeta(
+    return MapperMeta._(
       from: [
         FROM1,
         FROM2,
@@ -120,7 +120,7 @@ class MapperMeta {
             SixSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, TO>>
         mapperCreator,
   ) {
-    return MapperMeta(
+    return MapperMeta._(
       from: [
         FROM1,
         FROM2,
@@ -149,7 +149,7 @@ class MapperMeta {
                 TO>>
         mapperCreator,
   ) {
-    return MapperMeta(
+    return MapperMeta._(
       from: [
         FROM1,
         FROM2,
@@ -180,7 +180,7 @@ class MapperMeta {
                 FROM8, TO>>
         mapperCreator,
   ) {
-    return MapperMeta(
+    return MapperMeta._(
       from: [
         FROM1,
         FROM2,
@@ -213,7 +213,7 @@ class MapperMeta {
                 FROM8, FROM9, TO>>
         mapperCreator,
   ) {
-    return MapperMeta(
+    return MapperMeta._(
       from: [
         FROM1,
         FROM2,

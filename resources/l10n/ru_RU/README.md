@@ -68,7 +68,7 @@ void main() {
     lastName: 'Potter',
   );
 
-  final userResponse = mapster.map(user, To<UserResponse>());
+  final userResponse = mapster.map1(user, To<UserResponse>());
 }
 ```
 
@@ -77,7 +77,7 @@ void main() {
 
 ## Map функции
 
-`Mapster` имеет 9 `map` методов: `map`, `map2`, ... , `map9`. Каждый метод принимает входные данные
+`Mapster` имеет 9 `map` методов: `map1`, `map2`, ... , `map9`. Каждый метод принимает входные данные
 и затем `To<YourResultType>()`.
 
 Вы можете передавать объекты-источники в `map` метод `Mapster`'а в любом порядке. Вам не нужно
@@ -226,13 +226,13 @@ void main() {
   // Регистрация Mapper'а с входным типом: User и выходным типом: UserResponse
   mapster.register(MapperMeta.one(UserToUserResponseMapper.new));
 
-  final userResponse1 = mapster.map(user, To<UserResponse>());
+  final userResponse1 = mapster.map1(user, To<UserResponse>());
 
   // Регистрация другого Mapper'а с теми же типами: 
   // входной тип: User, выходной тип: UserResponse
   mapster.register(MapperMeta.one(AnotherUserToUserResponseMapper.new));
 
-  final userResponse2 = mapster.map(user, To<UserResponse>());
+  final userResponse2 = mapster.map1(user, To<UserResponse>());
 }
 ```
 
@@ -253,7 +253,7 @@ void main() {
   // Регистрация Mapper'а с входным типом: User и выходным типом: UserResponse
   mapster.register(MapperMeta.one(UserToUserResponseMapper.new));
 
-  final userResponse1 = mapster.map(user, To<UserResponse>());
+  final userResponse1 = mapster.map1(user, To<UserResponse>());
 
   // Регистрация другого Mapper'а с поменяными входным и выходным типами: 
   // входной тип: UserResponse, выходной тип: User
@@ -265,7 +265,7 @@ void main() {
   // Также можно сказать: т. к. выходной тип 1-го Mapper'а не равен
   // выходному типу 2-го Mapper'а, эти два
   // Mapper'а считаются разными.
-  final user2 = mapster.map(userResponse1, To<User>());
+  final user2 = mapster.map1(userResponse1, To<User>());
 }
 ```
 
