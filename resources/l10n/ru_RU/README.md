@@ -276,7 +276,7 @@ void main() {
 
 ```dart
 @module
-class MapsterModule {
+abstract class MapsterModule {
   @singleton
   Mapster get mapster => Mapster();
 }

@@ -274,7 +274,7 @@ and `Mapper`s like that:
 
 ```dart
 @module
-class MapsterModule {
+abstract class MapsterModule {
   @singleton
   Mapster get mapster => Mapster();
 }
