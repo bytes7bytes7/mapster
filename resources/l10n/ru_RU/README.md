@@ -75,6 +75,33 @@ void main() {
 Обратите внимание на то, что вам необходимо последним аргументом передавать `To<YourResultType>()`.
 Таким образом вы указываете, в какой тип `Mapster` должен преобразовать объект.
 
+Также для удобства вы можете создать приватные геттеры для `source` объектов.
+
+```dart
+class UserUserPostToLikedPostNotification
+    extends ThreeSourcesMapper<User, User, Post, LikedPostNotification> {
+  UserUserPostToLikedPostNotification(super.input);
+
+  @override
+  LikedPostNotification map() {
+    return LikedPostNotification(
+      postID: _post.id,
+      authorID: _user1.id,
+      likeUserID: _user2.id,
+      postText: _post.text,
+      authorName: '${_user1.firstName} ${_user1.lastName}',
+      likeUserName: '${_user2.firstName} ${_user2.lastName}',
+    );
+  }
+
+  User get _user1 => source1;
+
+  User get _user2 => source2;
+
+  Post get _post => source3;
+}
+```
+
 ## Map функции
 
 `Mapster` имеет 9 `map` методов: `map1`, `map2`, ... , `map9`. Каждый метод принимает входные данные

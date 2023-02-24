@@ -74,14 +74,20 @@ class UserUserPostToLikedPostNotification
   @override
   LikedPostNotification map() {
     return LikedPostNotification(
-      postID: source3.id,
-      authorID: source1.id,
-      likeUserID: source2.id,
-      postText: source3.text,
-      authorName: '${source1.firstName} ${source1.lastName}',
-      likeUserName: '${source2.firstName} ${source2.lastName}',
+      postID: _post.id,
+      authorID: _user1.id,
+      likeUserID: _user2.id,
+      postText: _post.text,
+      authorName: '${_user1.firstName} ${_user1.lastName}',
+      likeUserName: '${_user2.firstName} ${_user2.lastName}',
     );
   }
+
+  User get _user1 => source1;
+
+  User get _user2 => source2;
+
+  Post get _post => source3;
 }
 
 void threeSourcesExample(Mapster mapster) {
