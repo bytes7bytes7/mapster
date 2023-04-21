@@ -132,6 +132,55 @@ void threeSourcesExample(Mapster mapster) {
   print(notification2);
 }
 
+class ToUserInfoResponseDTO {
+  const ToUserInfoResponseDTO({
+    required this.id,
+    required this.firstName,
+    this.lastName,
+    this.phone,
+  });
+
+  final int id;
+  final String firstName;
+  final String? lastName;
+  final String? phone;
+}
+
+class UserInfoToUserInfoResponseMapper
+    extends OneSourceMapper<ToUserInfoResponseDTO, UserInfoResponse> {
+  UserInfoToUserInfoResponseMapper(super.input);
+
+  @override
+  UserInfoResponse map() {
+    var fullName = source.firstName;
+
+    final lastName = source.lastName;
+    if (lastName != null) {
+      fullName += ' $lastName';
+    }
+
+    return UserInfoResponse(
+      id: source.id,
+      fullName: fullName,
+      phone: source.phone,
+    );
+  }
+}
+
+void exampleWithDTO(Mapster mapster) {
+  /// If you need to pass `null` create special DTO for it.
+  final dto = ToUserInfoResponseDTO(
+    id: 1,
+    firstName: 'Harry',
+    lastName: null,
+    phone: null,
+  );
+
+  mapster.register(MapperMeta.one(UserInfoToUserInfoResponseMapper.new));
+
+  print(mapster.map1(dto, To<UserInfoResponse>()));
+}
+
 class AnotherUserToUserResponseMapper
     extends OneSourceMapper<User, UserResponse> {
   AnotherUserToUserResponseMapper(super.input);
@@ -171,5 +220,6 @@ void main() {
   oneSourceExample(mapster);
   twoSourcesExample(mapster);
   threeSourcesExample(mapster);
+  exampleWithDTO(mapster);
   redefineOneSourceExample(mapster);
 }

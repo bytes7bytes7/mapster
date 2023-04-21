@@ -1,3 +1,12 @@
+## 0.3.2
+
+- Remove ability to use `null` in mappers due to impossibility of determine a proper mapper.
+- Add some info about `How to work with nullable types` to docs.
+
+## 0.3.1
+
+- Add ability to use `null` in mappers.
+
 ## 0.3.0
 
 - Rename `map` function to `map1` in `Mapster`

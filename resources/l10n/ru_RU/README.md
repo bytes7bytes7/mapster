@@ -107,7 +107,7 @@ class UserUserPostToLikedPostNotification
 `Mapster` имеет 9 `map` методов: `map1`, `map2`, ... , `map9`. Каждый метод принимает входные данные
 и затем `To<YourResultType>()`.
 
-Вы можете передавать объекты-источники в `map` метод `Mapster`'а в любом порядке. Вам не нужно
+Вы можете передавать объекты-источники в `map` метод `Mapster`'а `В ЛЮБОМ ПОРЯДКЕ`. Вам не нужно
 каждый раз проверять порядок входных данных в сигнатуре какого-то конкретного `Mapper`'а. `Mapster`
 достаточно умен, чтобы найти подходящий `Mapper`.
 
@@ -209,6 +209,62 @@ void main() {
     post,
     To<LikedPostNotification>(),
   );
+}
+```
+
+Также вы не можете создать `Mapper` с nullable входными или выходным типами. Вместо этого вы можете
+создать [DTO](https://en.wikipedia.org/wiki/Data_transfer_object). Например:
+
+```dart
+class ToUserInfoResponseDTO {
+  const ToUserInfoResponseDTO({
+    required this.id,
+    required this.firstName,
+    this.lastName,
+    this.phone,
+  });
+
+  final int id;
+  final String firstName;
+  final String? lastName;
+  final String? phone;
+}
+
+class UserInfoToUserInfoResponseMapper
+    extends OneSourceMapper<ToUserInfoResponseDTO, UserInfoResponse> {
+  UserInfoToUserInfoResponseMapper(super.input);
+
+  @override
+  UserInfoResponse map() {
+    var fullName = source.firstName;
+
+    final lastName = source.lastName;
+    if (lastName != null) {
+      fullName += ' $lastName';
+    }
+
+    return UserInfoResponse(
+      id: source.id,
+      fullName: fullName,
+      phone: source.phone,
+    );
+  }
+}
+
+void main() {
+  final mapster = Mapster();
+
+  /// Если вам необходимо передавать `null`, создайте специальный DTO объект
+  final dto = ToUserInfoResponseDTO(
+    id: 1,
+    firstName: 'Harry',
+    lastName: null,
+    phone: null,
+  );
+
+  mapster.register(MapperMeta.one(UserInfoToUserInfoResponseMapper.new));
+
+  print(mapster.map1(dto, To<UserInfoResponse>()));
 }
 ```
 

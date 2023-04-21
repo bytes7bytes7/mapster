@@ -107,8 +107,8 @@ class UserUserPostToLikedPostNotification
 `Mapster` has 9 `map` methods: `map1`, `map2`, ... , `map9`. All of them get source objects and
 then `To<YourResultType>()`.
 
-You can pass source objects to `Mapster`'s `map` methods in any order. You do not need to check the
-order of input objects in signature of certain `Mapper` every time. `Mapster` is smart enough to
+You can pass source objects to `Mapster`'s `map` methods `IN ANY ORDER`. You do not need to check
+the order of input objects in signature of certain `Mapper` every time. `Mapster` is smart enough to
 find a proper `Mapper`.
 
 ```dart
@@ -208,6 +208,62 @@ void main() {
     post,
     To<LikedPostNotification>(),
   );
+}
+```
+
+Also you can not create a `Mapper` with nullable input or output types. Instead you can create
+a [DTO](https://en.wikipedia.org/wiki/Data_transfer_object). For example:
+
+```dart
+class ToUserInfoResponseDTO {
+  const ToUserInfoResponseDTO({
+    required this.id,
+    required this.firstName,
+    this.lastName,
+    this.phone,
+  });
+
+  final int id;
+  final String firstName;
+  final String? lastName;
+  final String? phone;
+}
+
+class UserInfoToUserInfoResponseMapper
+    extends OneSourceMapper<ToUserInfoResponseDTO, UserInfoResponse> {
+  UserInfoToUserInfoResponseMapper(super.input);
+
+  @override
+  UserInfoResponse map() {
+    var fullName = source.firstName;
+
+    final lastName = source.lastName;
+    if (lastName != null) {
+      fullName += ' $lastName';
+    }
+
+    return UserInfoResponse(
+      id: source.id,
+      fullName: fullName,
+      phone: source.phone,
+    );
+  }
+}
+
+void main() {
+  final mapster = Mapster();
+  
+  /// If you need to pass `null` create special DTO for it.
+  final dto = ToUserInfoResponseDTO(
+    id: 1,
+    firstName: 'Harry',
+    lastName: null,
+    phone: null,
+  );
+
+  mapster.register(MapperMeta.one(UserInfoToUserInfoResponseMapper.new));
+
+  print(mapster.map1(dto, To<UserInfoResponse>()));
 }
 ```
 
