@@ -107,8 +107,8 @@ class UserUserPostToLikedPostNotification
 `Mapster` has 9 `map` methods: `map1`, `map2`, ... , `map9`. All of them get source objects and
 then `To<YourResultType>()`.
 
-You can pass source objects to `Mapster`'s `map` methods in any order. You do not need to check the
-order of input objects in signature of certain `Mapper` every time. `Mapster` is smart enough to
+You can pass source objects to `Mapster`'s `map` methods `IN ANY ORDER`. You do not need to check
+the order of input objects in signature of certain `Mapper` every time. `Mapster` is smart enough to
 find a proper `Mapper`.
 
 ```dart

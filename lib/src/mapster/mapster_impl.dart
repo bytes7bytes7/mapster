@@ -12,7 +12,7 @@ class _MapsterImpl implements Mapster {
   }
 
   @override
-  TO map1<FROM extends Object, TO extends Object>(
+  TO map1<FROM, TO>(
     FROM source,
     To<TO> to,
   ) {
@@ -42,7 +42,7 @@ class _MapsterImpl implements Mapster {
   }
 
   @override
-  TO map2<FROM1 extends Object, FROM2 extends Object, TO extends Object>(
+  TO map2<FROM1, FROM2, TO>(
     FROM1 source1,
     FROM2 source2,
     To<TO> to,
@@ -75,8 +75,7 @@ class _MapsterImpl implements Mapster {
   }
 
   @override
-  TO map3<FROM1 extends Object, FROM2 extends Object, FROM3 extends Object,
-      TO extends Object>(
+  TO map3<FROM1, FROM2, FROM3, TO>(
     FROM1 source1,
     FROM2 source2,
     FROM3 source3,
@@ -112,8 +111,7 @@ class _MapsterImpl implements Mapster {
   }
 
   @override
-  TO map4<FROM1 extends Object, FROM2 extends Object, FROM3 extends Object,
-      FROM4 extends Object, TO extends Object>(
+  TO map4<FROM1, FROM2, FROM3, FROM4, TO>(
     FROM1 source1,
     FROM2 source2,
     FROM3 source3,
@@ -152,8 +150,7 @@ class _MapsterImpl implements Mapster {
   }
 
   @override
-  TO map5<FROM1 extends Object, FROM2 extends Object, FROM3 extends Object,
-      FROM4 extends Object, FROM5 extends Object, TO extends Object>(
+  TO map5<FROM1, FROM2, FROM3, FROM4, FROM5, TO>(
     FROM1 source1,
     FROM2 source2,
     FROM3 source3,
@@ -196,14 +193,7 @@ class _MapsterImpl implements Mapster {
   }
 
   @override
-  TO map6<
-      FROM1 extends Object,
-      FROM2 extends Object,
-      FROM3 extends Object,
-      FROM4 extends Object,
-      FROM5 extends Object,
-      FROM6 extends Object,
-      TO extends Object>(
+  TO map6<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, TO>(
     FROM1 source1,
     FROM2 source2,
     FROM3 source3,
@@ -250,15 +240,7 @@ class _MapsterImpl implements Mapster {
   }
 
   @override
-  TO map7<
-      FROM1 extends Object,
-      FROM2 extends Object,
-      FROM3 extends Object,
-      FROM4 extends Object,
-      FROM5 extends Object,
-      FROM6 extends Object,
-      FROM7 extends Object,
-      TO extends Object>(
+  TO map7<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7, TO>(
     FROM1 source1,
     FROM2 source2,
     FROM3 source3,
@@ -308,16 +290,7 @@ class _MapsterImpl implements Mapster {
   }
 
   @override
-  TO map8<
-      FROM1 extends Object,
-      FROM2 extends Object,
-      FROM3 extends Object,
-      FROM4 extends Object,
-      FROM5 extends Object,
-      FROM6 extends Object,
-      FROM7 extends Object,
-      FROM8 extends Object,
-      TO extends Object>(
+  TO map8<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7, FROM8, TO>(
     FROM1 source1,
     FROM2 source2,
     FROM3 source3,
@@ -370,17 +343,7 @@ class _MapsterImpl implements Mapster {
   }
 
   @override
-  TO map9<
-      FROM1 extends Object,
-      FROM2 extends Object,
-      FROM3 extends Object,
-      FROM4 extends Object,
-      FROM5 extends Object,
-      FROM6 extends Object,
-      FROM7 extends Object,
-      FROM8 extends Object,
-      FROM9 extends Object,
-      TO extends Object>(
+  TO map9<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7, FROM8, FROM9, TO>(
     FROM1 source1,
     FROM2 source2,
     FROM3 source3,
@@ -454,7 +417,7 @@ class _MapsterImpl implements Mapster {
 
   MapperInput _createInput(
     List<Type> types,
-    List<Object> sources,
+    List<Object?> sources,
   ) {
     final input = MapperInput();
 

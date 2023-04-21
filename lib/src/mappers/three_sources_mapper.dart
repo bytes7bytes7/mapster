@@ -1,8 +1,7 @@
 import 'mapper.dart';
 
 /// [Mapper] with 3 source objects.
-abstract class ThreeSourcesMapper<FROM1 extends Object, FROM2 extends Object,
-    FROM3 extends Object, TO extends Object> extends Mapper<TO> {
+abstract class ThreeSourcesMapper<FROM1, FROM2, FROM3, TO> extends Mapper<TO> {
   ThreeSourcesMapper(super.input)
       : source1 = getMapperSourceByType<FROM1>(input),
         source2 = getMapperSourceByType<FROM2>(input),

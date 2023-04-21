@@ -2,14 +2,13 @@
 
 import 'dart:collection';
 
-T getMapperSourceByType<T extends Object>(MapperInput input) =>
-    (input[T] as List).removeAt(0);
+T getMapperSourceByType<T>(MapperInput input) => (input[T] as List).removeAt(0);
 
 /// Input parameters for [Mapper].
-typedef MapperInput = HashMap<Type, List<Object>>;
+typedef MapperInput = HashMap<Type, List<Object?>>;
 
 /// Base class for all mappers.
-abstract class Mapper<TO extends Object> {
+abstract class Mapper<TO> {
   const Mapper(MapperInput input);
 
   /// Mapping method.

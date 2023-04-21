@@ -1,3 +1,7 @@
+## 0.3.1
+
+- Add ability to use `null` in mappers.
+
 ## 0.3.0
 
 - Rename `map` function to `map1` in `Mapster`
