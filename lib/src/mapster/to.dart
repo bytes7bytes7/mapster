@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
 
 /// Helps to specify output type.
-class To<T> {
+class To<T extends Object> {
   final Type to = T;
 
   @override

@@ -22,7 +22,7 @@ class MapperMeta {
   final MapperCreator mapperCreator;
 
   /// Creates [MapperMeta] for [OneSourceMapper].
-  static MapperMeta one<FROM, TO>(
+  static MapperMeta one<FROM extends Object, TO extends Object>(
     MapperCreator<OneSourceMapper<FROM, TO>> mapperCreator,
   ) {
     return MapperMeta._(
@@ -35,7 +35,8 @@ class MapperMeta {
   }
 
   /// Creates [MapperMeta] for [TwoSourcesMapper].
-  static MapperMeta two<FROM1, FROM2, TO>(
+  static MapperMeta
+      two<FROM1 extends Object, FROM2 extends Object, TO extends Object>(
     MapperCreator<TwoSourcesMapper<FROM1, FROM2, TO>> mapperCreator,
   ) {
     return MapperMeta._(
@@ -49,7 +50,8 @@ class MapperMeta {
   }
 
   /// Creates [MapperMeta] for [ThreeSourcesMapper].
-  static MapperMeta three<FROM1, FROM2, FROM3, TO>(
+  static MapperMeta three<FROM1 extends Object, FROM2 extends Object,
+      FROM3 extends Object, TO extends Object>(
     MapperCreator<ThreeSourcesMapper<FROM1, FROM2, FROM3, TO>> mapperCreator,
   ) {
     return MapperMeta._(
@@ -64,7 +66,8 @@ class MapperMeta {
   }
 
   /// Creates [MapperMeta] for [FourSourcesMapper].
-  static MapperMeta four<FROM1, FROM2, FROM3, FROM4, TO>(
+  static MapperMeta four<FROM1 extends Object, FROM2 extends Object,
+      FROM3 extends Object, FROM4 extends Object, TO extends Object>(
     MapperCreator<FourSourcesMapper<FROM1, FROM2, FROM3, FROM4, TO>>
         mapperCreator,
   ) {
@@ -81,7 +84,13 @@ class MapperMeta {
   }
 
   /// Creates [MapperMeta] for [FiveSourcesMapper].
-  static MapperMeta five<FROM1, FROM2, FROM3, FROM4, FROM5, TO>(
+  static MapperMeta five<
+      FROM1 extends Object,
+      FROM2 extends Object,
+      FROM3 extends Object,
+      FROM4 extends Object,
+      FROM5 extends Object,
+      TO extends Object>(
     MapperCreator<FiveSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, TO>>
         mapperCreator,
   ) {
@@ -99,7 +108,14 @@ class MapperMeta {
   }
 
   /// Creates [MapperMeta] for [SixSourcesMapper].
-  static MapperMeta six<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, TO>(
+  static MapperMeta six<
+      FROM1 extends Object,
+      FROM2 extends Object,
+      FROM3 extends Object,
+      FROM4 extends Object,
+      FROM5 extends Object,
+      FROM6 extends Object,
+      TO extends Object>(
     MapperCreator<
             SixSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, TO>>
         mapperCreator,
@@ -119,7 +135,15 @@ class MapperMeta {
   }
 
   /// Creates [MapperMeta] for [SevenSourcesMapper].
-  static MapperMeta seven<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7, TO>(
+  static MapperMeta seven<
+      FROM1 extends Object,
+      FROM2 extends Object,
+      FROM3 extends Object,
+      FROM4 extends Object,
+      FROM5 extends Object,
+      FROM6 extends Object,
+      FROM7 extends Object,
+      TO extends Object>(
     MapperCreator<
             SevenSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7,
                 TO>>
@@ -141,8 +165,16 @@ class MapperMeta {
   }
 
   /// Creates [MapperMeta] for [EightSourcesMapper].
-  static MapperMeta
-      eight<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7, FROM8, TO>(
+  static MapperMeta eight<
+      FROM1 extends Object,
+      FROM2 extends Object,
+      FROM3 extends Object,
+      FROM4 extends Object,
+      FROM5 extends Object,
+      FROM6 extends Object,
+      FROM7 extends Object,
+      FROM8 extends Object,
+      TO extends Object>(
     MapperCreator<
             EightSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7,
                 FROM8, TO>>
@@ -165,8 +197,17 @@ class MapperMeta {
   }
 
   /// Creates [MapperMeta] for [NineSourcesMapper].
-  static MapperMeta
-      nine<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7, FROM8, FROM9, TO>(
+  static MapperMeta nine<
+      FROM1 extends Object,
+      FROM2 extends Object,
+      FROM3 extends Object,
+      FROM4 extends Object,
+      FROM5 extends Object,
+      FROM6 extends Object,
+      FROM7 extends Object,
+      FROM8 extends Object,
+      FROM9 extends Object,
+      TO extends Object>(
     MapperCreator<
             NineSourcesMapper<FROM1, FROM2, FROM3, FROM4, FROM5, FROM6, FROM7,
                 FROM8, FROM9, TO>>
